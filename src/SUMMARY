@@ -1,0 +1,12 @@
+Bean
+	---> classes --> attributes --> getter stters;     ------------->DONE
+Dao
+	---> FULL DATABASE LOGIC 
+Util
+	---> MYSQL --> JAVA CONNECT
+Filter
+		-> REGEX
+Controller
+		->		lOGIC ..
+		
+----------------------------------------------------------------------------------
