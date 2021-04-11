@@ -21,11 +21,6 @@ public class PackageDetailFilter
 				System.out.println("Invalid no of periods : "+t.getPeriod_days());
 				empty++;
 			}
-			if(t.getNoOfPeople()==0 )
-			{
-				System.out.println("Invalid no of people : "+t.getNoOfPeople());
-				empty++;
-			}
 			if(t.getNoOfTicketsAvailable()==0 )
 			{
 				System.out.println("Invalid no of tickets Available : "+t.getNoOfTicketsAvailable());

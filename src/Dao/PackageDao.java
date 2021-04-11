@@ -18,7 +18,7 @@ public class PackageDao {
 		try (
 				Connection con = JDBCConnection.getConnection();
 				PreparedStatement pstmt = con
-						.prepareStatement("insert into package(TicketsAvailable,Country,noOfPeople,PeriodDay,AdminId) values(?,?,?,?,?)");
+						.prepareStatement("insert into package(TicketsAvailable,Country,PeriodDay,AdminId) values(?,?,?,?)");
 				PreparedStatement pstmt2 = con
 						.prepareStatement(" select PackageId from package where AdminId=? order by packageID desc limit 1; ");
 			) 
@@ -27,9 +27,8 @@ public class PackageDao {
 			
 			pstmt.setInt(1,a.getNoOfTicketsAvailable());
 			pstmt.setString(2, a.getCountry());
-			pstmt.setInt(3, a.getNoOfPeople());
-			pstmt.setInt(4, a.getPeriod_days());
-			pstmt.setInt(5, adminId);
+			pstmt.setInt(3, a.getPeriod_days());
+			pstmt.setInt(4, adminId);
 			int i=pstmt.executeUpdate();
 			
 				
@@ -41,17 +40,10 @@ public class PackageDao {
 				return  rs.getInt("PackageId");
 			}
 			
-//			if (i == 0) {
-//				return a;
-//			} else {
-//				return null;
-//			}	
-		} 
+	} 
 		catch (Exception e) {
-			//System.out.println("productDao -> getAllProducts()");
 			e.printStackTrace();
 		}
 	return 0;
-	}
-	
+	}	
 }

@@ -52,6 +52,8 @@ public class UserEnterDetails
 		admin.setAccountName(AccountName);
 		admin.setAccountNo(AccountNumber);
 		sc.close();
+		
+		
 		int validationCheck =Filter.UserDetailFilter.validationUser(admin);
 		if(validationCheck==0)
 		{

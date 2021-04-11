@@ -20,8 +20,6 @@ public class PackageDetails
 		String Country=sc.nextLine();
 		System.out.println("Enter No of Days  : ");          //
 		int noOfDays=sc.nextInt();
-		System.out.println("Enter No of People  : ");          //
-		int noOfPeople=sc.nextInt();
 		System.out.println("No of Tickets Available : ");          //
 		int ticketsAvailable=sc.nextInt();
 
@@ -31,7 +29,6 @@ public class PackageDetails
 		// country noOfPeople noOfDays  ticketsAvailable
 		t.setNoOfTicketsAvailable(ticketsAvailable);
 		t.setCountry(Country);
-		t.setNoOfPeople(noOfPeople);
 		//t.setPackageId(noOfPeople);
 		t.setPeriod_days(noOfDays);
 		System.out.println("********************USER Transportation***************************\n");

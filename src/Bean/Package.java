@@ -5,7 +5,6 @@ public class Package
 	int PackageId;
 	String Country;
 	int Period_days;
-	int noOfPeople;
 	int noOfTicketsAvailable;
 	
 	String PackageName;
@@ -48,10 +47,10 @@ public class Package
 	public void setPeriod_days(int period_days) {
 		Period_days = period_days;
 	}
-	public int getNoOfPeople() {
-		return noOfPeople;
-	}
-	public void setNoOfPeople(int noOfPeople) {
-		this.noOfPeople = noOfPeople;
-	}
+//	public int getNoOfPeople() {
+//		return noOfPeople;
+//	}
+//	public void setNoOfPeople(int noOfPeople) {
+//		this.noOfPeople = noOfPeople;
+//	}
 }
