@@ -2,6 +2,9 @@ package Controller;
 
 import java.util.Scanner;
 
+import Bean.AdminPayment;
+import Bean.UserPayment;
+
 public class IndexClass {
 
 	public static void main(String[] args) 
@@ -22,20 +25,32 @@ public class IndexClass {
 							System.out.println("1-----Admin Signup ");
 							System.out.println("2-----Admin Login ");
 							System.out.println("3-----Go back");
-							String choic = sc.next();
-							adminChoice= Integer.parseInt(choic);
+							adminChoice=  sc.nextInt();
 							switch(adminChoice)
 							{
 							case 1:
 											AdminEnterDetail ad=new AdminEnterDetail();
-											ad.AdminEnterDetail();
-							
-											
-											// aia jai ne signu up karje
-								break;
+											boolean b= ad.AdminEnterDetail();
+											if(b==true) 
+											{
+												System.out.println("Signup Sucessful");
+											}
+											else
+											{
+												System.out.println("Signup Un-Sucessful");	
+											}	
+							break;
 							case 2:
-										// login 
-								break;
+											if(Login.AdminLogindetails()==null)
+											{
+												System.out.println("Login Details Invalid");
+											}
+											else
+											{
+												AdminPayment a=Login.AdminLogindetails();
+												
+											}
+							break;
 							case 3:
 									break AdminWhile; 
 							}
@@ -51,26 +66,38 @@ public class IndexClass {
 						switch(userChoice)
 						{
 						case 1:
-										// aia jai ne signu up karje
+									UserEnterDetails ud=new UserEnterDetails();
+									boolean b=ud.UserEnterDetail();
+									if(b==true) 
+									{
+										System.out.println("Login Sucessful");
+									}
+									else
+									{
+										System.out.println("Login Un-Sucessful");	
+									}
 							break;
 						case 2:
-									// lo
-//						
-
-							
+									if(Login.UserLogindetails()==null)
+									{
+										System.out.println("Loged perfefectly User");	
+									}
+									else
+									{
+										UserPayment a = Login.UserLogindetails();
+									}
+										
 							break;
 						case 3:
 								break UserWhile; 
 						}
-					}
-					
+					}	
 				break;
-				
+			
 				case 3 : 
+					sc.close();
 						System.exit(0);
 			}
-		}
-			
+		}	
 	}
-
 }

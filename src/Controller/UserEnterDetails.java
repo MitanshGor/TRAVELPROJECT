@@ -7,7 +7,7 @@ import Bean.UserPayment;
 
 public class UserEnterDetails 
 {	
-	public void AdminEnterDetail() 
+	public boolean UserEnterDetail() 
 	{
 		String name;
 		Scanner sc=new Scanner(System.in);
@@ -15,25 +15,25 @@ public class UserEnterDetails
 		
 		System.out.println("********************USER SIGN  UP***************************");
 		System.out.println("Enter Name :");
-		name=sc.next();
+		name=sc.nextLine();
 		System.out.println("Enter Email :");
-		String email = sc.next();
-		System.out.println("Enter password :");
-		String password = sc.next();
-		System.out.println("Enter DOB :");
-		String DOB = sc.next();
+		String email = sc.nextLine();
+		System.out.println("Enter password [should only have characters from : (a-zA-Z0-9!@#$%^&*()_-) ] :");
+		String password = sc.nextLine();
+		System.out.println("Enter DOB (YYYY-MM-DD):");
+		String DOB = sc.nextLine();
 		System.out.println("Enter Phone :");
-		String phone = sc.next();
+		String phone = sc.nextLine();
 		System.out.println("Enter Address :");
-		String address = sc.next();
-		System.out.println("Enter Gender :");
-		String Gender = sc.next();
+		String address = sc.nextLine();
+		System.out.println("Enter Gender  (M/F):");
+		String Gender = sc.nextLine();
 		System.out.println("Enter Bank Name :");
-		String BankName = sc.next();
+		String BankName = sc.nextLine();
 		System.out.println("Enter Account Number :");
-		String AccountNumber = sc.next();
+		String AccountNumber = sc.nextLine();
 		System.out.println("Enter Account Name :");
-		String AccountName = sc.next();
+		String AccountName = sc.nextLine();
 		
 			
 		UserPayment admin=new UserPayment();
@@ -51,10 +51,31 @@ public class UserEnterDetails
 		admin.setBankName(BankName);
 		admin.setAccountName(AccountName);
 		admin.setAccountNo(AccountNumber);
-		
-		
-		boolean b1 = Dao.UserDao.setUserTable(admin);
-		boolean b2 = Dao.UserDao.setUserPaymentTable(admin);
-	
+		sc.close();
+		int validationCheck =Filter.UserDetailFilter.validationUser(admin);
+		if(validationCheck==0)
+		{
+			boolean b1 = Dao.UserDao.setUserTable(admin);
+			boolean b2 = Dao.UserDao.setUserPaymentTable(admin);
+			if(b1==false ||  b2==false)
+			{
+				System.out.println("Exception occoured !!!. Detail is not enetered into database");
+				return false;
+			}
+			else
+			{
+//				System.out.println("Sucessfull details entered in table sql");
+				return true;
+			}
+		}
+		else
+		{
+			System.out.println(validationCheck+"/10 number of data were INVALID !!!....Please fill valid data");
+			return false;	
+		}
 	}
+//	public static void main(String[] args) {
+//		UserEnterDetails u=new UserEnterDetails();
+//		u.UserEnterDetail();
+//	}
 }

@@ -59,7 +59,6 @@ public class Admin implements PersonDataInterface
 
 	@Override
 	public String getPhone() {
-		// TODO Auto-generated method stub
 		return phone;
 	}
 
@@ -85,8 +84,8 @@ public class Admin implements PersonDataInterface
 	}
 	@Override
 	public void setAddress(String address) {
-		// TODO Auto-generated method stub
-		
+	
+			this.Address=address;
 	}
 
 	

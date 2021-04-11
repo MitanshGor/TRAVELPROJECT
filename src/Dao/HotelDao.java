@@ -28,11 +28,11 @@ public class HotelDao {
 			pstmt.setInt(7, packageId);
 			int i=pstmt.executeUpdate();
 		
-			System.out.println("------------>"+a.getPackageId());
+			//System.out.println("------------>"+a.getPackageId());
 			pstmt2.setInt(1,packageId);
 			ResultSet rs=pstmt2.executeQuery();
 			while(rs.next()) {
-				System.out.println("--------------->"+ rs.getInt("HotelId"));
+				//System.out.println("--------------->"+ rs.getInt("HotelId"));
 			a.setHotelid(rs.getInt("HotelId"));
 			}
 //			if(i==0)

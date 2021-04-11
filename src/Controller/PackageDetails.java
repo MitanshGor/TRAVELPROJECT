@@ -8,20 +8,16 @@ import Bean.Transportation;
 
 public class PackageDetails 
 {
-	public void PackageDetailsData()
+	public static boolean PackageDetailsData(int adminId)
 	{
 		Scanner sc=new Scanner(System.in);
 		
 		
 
-		System.out.print("Enter Admin EmailId : ");
-		String adminEmail=sc.next();
-		System.out.print("Enter Admin Password : ");
-		String adminPassword=sc.next();
 		
-		
+		System.out.println("********************Package Details***************************\n");
 		System.out.println("Enter Country  : ");          //
-		String Country=sc.next();
+		String Country=sc.nextLine();
 		System.out.println("Enter No of Days  : ");          //
 		int noOfDays=sc.nextInt();
 		System.out.println("Enter No of People  : ");          //
@@ -38,14 +34,15 @@ public class PackageDetails
 		t.setNoOfPeople(noOfPeople);
 		//t.setPackageId(noOfPeople);
 		t.setPeriod_days(noOfDays);
-	
+		System.out.println("********************USER Transportation***************************\n");
 		
-		System.out.println("Enter Mode Of Transportation : ");
+		System.out.println("Enter Mode Of Transportation (1---Bus | 2--Train | 3--Flight ) : ");
 		int modeOfTrtportation=sc.nextInt();
+		sc.nextLine();
 		System.out.println("Enter Arrival_Date (YYYY-MM-DD): ");
-		String ArrivalDate=sc.next();
+		String ArrivalDate=sc.nextLine();
 		System.out.println("Enter Departure_Date (YYYY-MM-DD) : ");
-		String DepartureDate=sc.next();
+		String DepartureDate=sc.nextLine();
 		System.out.println("Enter Price : ");
 		float price=sc.nextFloat();
 		
@@ -55,17 +52,18 @@ public class PackageDetails
 		t.setModeOfTransportation(modeOfTrtportation);
 		t.setPrice(price);
 		
-		
-		System.out.println("Enter Hotel Name : ");
-		String Hotelname=sc.next();
-		System.out.println("Enter Star Type : ");
+		System.out.println("********************Enter Hotel***************************\n");
+		System.out.println("Enter Star Type ( /5): ");
 		int StarType=sc.nextInt();
-		System.out.println("Enter CheckIn : ");
-		String CheckIn=sc.next();
-		System.out.println("Enter CheckOut : ");
-		String CheckOut=sc.next();
-		System.out.println("Enter Address : ");
-		String Address=sc.next();
+		sc.nextLine();
+		System.out.println("Enter Hotel Name : ");
+		String Hotelname=sc.nextLine();
+		System.out.println("Enter CheckIn (YYYY-MM-DD): ");
+		String CheckIn=sc.nextLine();
+		System.out.println("Enter CheckOut (YYYY-MM-DD): ");
+		String CheckOut=sc.nextLine();
+		System.out.println("Enter Address of Hotel : ");
+		String Address=sc.nextLine();
 		System.out.println("Enter Price per Night : ");
 		float PricePerNight=sc.nextFloat();
 		
@@ -79,14 +77,38 @@ public class PackageDetails
 		h.setPricePerNight(PricePerNight);
 		
 //	Trtportation t=new Trtportation();
-	Dao.PackageDao.setPackageTable(t, adminEmail, adminPassword);
-//	System.out.println(t.getPackageId());
-	Dao.transportationDao.setTransportationDetailsSql(t,t.getPackageId());
-	System.out.println("----------------------Hurrre--------------------");
 	
+		
+		
+
 	
-	Dao.HotelDao.setHotelDetailsSql(h,t.getPackageId());
-//	System.out.println(t.getPackageId());
+	sc.close();
+	
+	int n = Filter.PackageDetailFilter.ValidationPackage(t, h);
+	if(n==0)
+	{
+		
+		int packageId=Dao.PackageDao.setPackageTable(t, adminId);
+		Dao.transportationDao.setTransportationDetailsSql(t,packageId);	
+		Dao.HotelDao.setHotelDetailsSql(h,packageId);
+
+		if(packageId==0)
+		{
+			System.out.println("Exception occoured !!!. Detail is not enetered into database");
+			return false;
+		}
+		else
+		{
+			return true;
+		}	
+	}
+	else
+	{
+		System.out.println(n+"/15 number of data were INVALID !!!....Please fill valid data");
+		return false;	
+	
+	}
+	//	System.out.println(t.getPackageId());
 //	System.out.println(t.getNoOfTicketsAvailable());
 //	System.out.println(t.getCountry());
 //	System.out.println(t.getNoOfPeople());
@@ -96,9 +118,5 @@ public class PackageDetails
 //	System.out.println(t.getArivalDate());
 //	System.out.println(t.getDepartureDate());
 //	System.out.println(t.getPrice());
-	}
-	public static void main(String[] args) {
-		PackageDetails p=new PackageDetails();
-		p.PackageDetailsData();
 	}
 }

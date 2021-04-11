@@ -3,7 +3,7 @@ package Bean;
 public class AdminPayment extends Admin
 {
 	private String BankName;
-	private int AccountNo;
+	private String AccountNo;
 	private String AccountName;
 	private float Price;
 	
@@ -13,10 +13,10 @@ public class AdminPayment extends Admin
 	public void setBankName(String bankName) {
 		BankName = bankName;
 	}
-	public int getAccountNo() {
+	public String getAccountNo() {
 		return AccountNo;
 	}
-	public void setAccountNo(int accountNo) {
+	public void setAccountNo(String accountNo) {
 		AccountNo = accountNo;
 	}
 	public String getAccountName() {

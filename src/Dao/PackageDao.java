@@ -13,7 +13,7 @@ import Util.JDBCConnection;
 public class PackageDao {
 
 	
-	public static void setPackageTable(Transportation a,String email,String password)
+	public static int setPackageTable(Transportation a ,int adminId)
 	{
 		try (
 				Connection con = JDBCConnection.getConnection();
@@ -23,7 +23,7 @@ public class PackageDao {
 						.prepareStatement(" select PackageId from package where AdminId=? order by packageID desc limit 1; ");
 			) 
 		{	
-			int adminId=AdminDao.getAdminFormEmailAndPass(email, password);
+			//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
 			
 			pstmt.setInt(1,a.getNoOfTicketsAvailable());
 			pstmt.setString(2, a.getCountry());
@@ -38,6 +38,7 @@ public class PackageDao {
 			while(rs.next())
 			{
 				a.setPackageId(rs.getInt("PackageId"));
+				return  rs.getInt("PackageId");
 			}
 			
 //			if (i == 0) {
@@ -47,10 +48,10 @@ public class PackageDao {
 //			}	
 		} 
 		catch (Exception e) {
-			System.out.println("productDao -> getAllProducts()");
+			//System.out.println("productDao -> getAllProducts()");
 			e.printStackTrace();
 		}
-//		return null;
+	return 0;
 	}
 	
 }
