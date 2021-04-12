@@ -2,13 +2,15 @@ package Bean;
 
 public class Transportation extends Package
 {
-	int transportId;
+	
 	public int getTransportId() {
 		return transportId;
 	}
 	public void setTransportId(int transportId) {
 		this.transportId = transportId;
 	}
+	
+	int transportId;
 	int modeOfTransportation;
 	String arivalDate;
 	String departureDate;

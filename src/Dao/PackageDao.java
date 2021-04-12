@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import Bean.Package;
 import Bean.Transportation;
@@ -45,5 +46,103 @@ public class PackageDao {
 			e.printStackTrace();
 		}
 	return 0;
+	}
+
+	public static ArrayList<Bean.Package> getAllPackageOfAdminId(int adminId) {
+		
+		try(
+				
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("select * from package where adminId=?");
+				)
+		{
+			pstmt.setInt(1,adminId);
+			ResultSet rs=pstmt.executeQuery();
+			
+			ArrayList<Bean.Package>  alPack =new ArrayList<Package>();
+			Package p ;
+			while(rs.next())
+			{
+				 p = new Package();
+
+				p.setUserId(rs.getInt("UserId"));
+				p.setPackageId(rs.getInt("Packageid"));
+				p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
+				p.setCountry(rs.getString("country"));
+				p.setPeriod_days(rs.getInt("PeriodDay"));
+				
+				alPack.add(p);
+				p=null;
+			}
+			return alPack;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
+
+	public static void DeleteSpecificPackage(int packageID) 
+	{
+		int b = 0;
+		int a = Dao.transportationDao.DeleteSpecificTransportation(packageID);
+		if(a==1)
+		{
+		 b= Dao.HotelDao.DeleteSpecificHotel(packageID);
+		}
+		if(a==1 && b==1)
+		{
+				try(
+						Connection con=JDBCConnection.getConnection();
+						PreparedStatement pstmt = con.prepareStatement("delete from package where packageId=?;");
+						)
+				{
+					pstmt.setInt(1,packageID);
+					int i = pstmt.executeUpdate();
+					if(i==0)
+					{
+						System.out.println("Half of the data is only deleted --> Please try again !!!!");	
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+		}
+		else
+		{
+			System.out.println("Data is not deleted please try again !!");
+		}
+	}
+
+	public static Package getPacakgeFromPackageID(int pId) 
+	{
+		
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("select * from package where packageId=?");
+			) 
+		{	
+			//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
+			Package a =new Package();
+			pstmt.setInt(1, pId);
+		ResultSet rs=pstmt.executeQuery();
+		while(rs.next())
+		{
+			a.setNoOfTicketsAvailable(rs.getInt("ticketsAvailable"));
+			a.setCountry(rs.getString("country"));
+			a.setPeriod_days(rs.getInt("PeriodDay"));
+		}
+				
+		return a;	
+			
+	} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	return null;	
 	}	
 }

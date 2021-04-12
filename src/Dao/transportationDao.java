@@ -3,7 +3,11 @@ package Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
+import Bean.Package;
 import Bean.Transportation;
 import Util.JDBCConnection;
 
@@ -42,4 +46,91 @@ public class transportationDao {
 		}
 		return null;
 	}
+
+	public static Transportation getTransportationDetailOfPackage(int packageId) 
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt=con.prepareStatement("select * from transportation where packageId=?");
+				)
+		{
+			pstmt.setInt(1, packageId);
+			
+			Transportation t=new Transportation();
+			ResultSet rs =pstmt.executeQuery();
+			while(rs.next())
+			{
+				
+				SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-MM-dd");
+				String adate = givenDate.format(rs.getDate("ArrivalDate"));
+				String ddate = givenDate.format(rs.getDate("DeparturDate"));
+
+						t.setTransportId(rs.getInt("TransportId"));
+						t.setModeOfTransportation(rs.getInt("modeOftransportation"));
+						t.setArivalDate(adate);
+						t.setDepartureDate(ddate);
+						t.setPrice(rs.getFloat("price"));
+						t.setPackageId(packageId);
+						
+			}
+			return t;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static int DeleteSpecificTransportation(int packageID) {
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("delete from transportation where packageId=?;");
+				)
+		{
+			pstmt.setInt(1,packageID);
+			int i = pstmt.executeUpdate();
+			return i;
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static Transportation getTransportationFromPackageID(int pId) 
+	{
+				try (
+						Connection con = JDBCConnection.getConnection();
+						PreparedStatement pstmt = con
+								.prepareStatement("select * from Transportation where packageId=?");
+					) 
+				{	
+					//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
+					Transportation a =new Transportation();
+					pstmt.setInt(1, pId);
+				ResultSet rs=pstmt.executeQuery();
+				while(rs.next())
+				{
+					SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-MM-dd");
+					String adate = givenDate.format(rs.getDate("ArrivalDate"));
+					String ddate = givenDate.format(rs.getDate("DeparturDate"));
+
+					a.setModeOfTransportation(rs.getInt("modeOfTransportation"));
+					a.setArivalDate(adate);
+					a.setDepartureDate(ddate);
+					a.setPrice(rs.getFloat("price"));
+				}
+						
+				return a;	
+					
+			} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			return null;	
+	}	
 }
+

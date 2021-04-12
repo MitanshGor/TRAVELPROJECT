@@ -2,24 +2,38 @@ package Bean;
 
 public class Package 
 {
+	public int getAdminId() {
+		return AdminId;
+	}
+	public void setAdminId(int adminId) {
+		AdminId = adminId;
+	}
+	public int getUserId() {
+		return UserId;
+	}
+	public void setUserId(int userId) {
+		UserId = userId;
+	}
+	
+	
+	int AdminId;
+	int UserId;
+	
 	int PackageId;
 	String Country;
 	int Period_days;
 	int noOfTicketsAvailable;
-	
-	String PackageName;
-	
-	public String getPackageName() 
-	{
-		return PackageName;
-	}
-	public void setPackageName(String packageName) 
-	{
-		PackageName = packageName;
-	}
+	float TotalPrice;
 
 
 	
+	
+	public float getTotalPrice() {
+		return TotalPrice;
+	}
+	public void setTotalPrice(float totalPrice) {
+		TotalPrice = totalPrice;
+	}
 	
 	public int getNoOfTicketsAvailable() {
 		return noOfTicketsAvailable;

@@ -172,4 +172,47 @@ public class AdminDao {
 		}
 		return null;
 	}
+	public static AdminPayment GetAdminDetails(int AdminId)
+	{
+		try(
+			Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt=con.prepareStatement(" select * from admin join adminpayment on (admin.AdminId = adminpayment.AdminId) where admin.adminId=?;");	
+			)
+		{
+			pstmt.setInt(1,AdminId);
+			ResultSet rs=pstmt.executeQuery();
+			AdminPayment a = new AdminPayment();
+			while(rs.next())
+			{
+						a.setAdminId(rs.getInt("AdminId"));
+						a.setAdminName(rs.getString("AdminName"));
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+					    String strDate = formatter.format(rs.getDate("DOB"));  
+					    a.setDOB(strDate);
+					    a.setEmail(rs.getString("email"));
+					    a.setPassword(rs.getString("password"));
+					    a.setPhone(rs.getString("phone"));
+					    a.setGender(rs.getString("gender"));
+					    a.setAddress(rs.getString("address"));
+						a.setAccountNo(rs.getString("AccountNo"));
+						a.setAccountName(rs.getString("Accountname"));
+						a.setBankName(rs.getString("BankName"));
+				}
+			
+			if(a.getAdminId()==0)
+			{
+				return null;
+			}
+			else
+			{
+				return a;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
