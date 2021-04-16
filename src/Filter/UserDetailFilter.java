@@ -59,6 +59,11 @@ public class UserDetailFilter {
 		
 			empty ++;
 		}
+//		if(a.getBooktickets()<1)
+//		{
+//			System.out.println("Invalid Book Tickets = "+a.getBooktickets());
+//			empty ++;
+//		}
 		return empty;
 	}
 

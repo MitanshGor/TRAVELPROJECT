@@ -48,6 +48,7 @@ public class IndexClass {
 											else
 											{
 												AdminPayment a=Login.AdminLogindetails();
+												AdminLoginSucessful.AdminLoginSucessfulMethod(a);
 												
 											}
 							break;
@@ -85,6 +86,7 @@ public class IndexClass {
 									else
 									{
 										UserPayment a = Login.UserLogindetails();
+									
 									}
 										
 							break;

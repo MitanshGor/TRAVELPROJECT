@@ -161,7 +161,7 @@ public class AdminLoginSucessful
 						System.out.printf("%-12sAccountName","");
 						System.out.printf("%-12sBankName","");
 				System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.printf("%17s%17s%20s%20s%20s%17s%12s%27s%15s%20s%20s%n",ap.getAdminId(),ap.getAdminName(),ap.getDOB(),ap.getEmail(),ap.getPassword(),ap.getPhone(),ap.getGender(),ap.getAddress(),ap.getAccountNo(),ap.getAccountName(),ap.getBankName());
+				System.out.printf("%17s%17s%20s%20s%20s%17s%12s%27s%15s%20s%20s%n",a.getAdminId(),ap.getAdminName(),ap.getDOB(),ap.getEmail(),ap.getPassword(),ap.getPhone(),ap.getGender(),ap.getAddress(),ap.getAccountNo(),ap.getAccountName(),ap.getBankName());
 				System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				
 									
@@ -216,10 +216,10 @@ public class AdminLoginSucessful
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		AdminPayment a =new AdminPayment();
-		a.setAdminId(16);
+		a.setAdminId(14);
 		AdminLoginSucessful.AdminLoginSucessfulMethod(a);	
 	}
 }

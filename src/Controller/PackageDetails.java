@@ -222,7 +222,7 @@ public class PackageDetails
 		
 
 	
-	sc.close();
+//	sc.close();
 	
 	int n = Filter.PackageDetailFilter.ValidationPackage(t, h);
 	if(n==0)

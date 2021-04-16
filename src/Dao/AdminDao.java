@@ -187,8 +187,12 @@ public class AdminDao {
 						a.setAdminId(rs.getInt("AdminId"));
 						a.setAdminName(rs.getString("AdminName"));
 						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
-					    String strDate = formatter.format(rs.getDate("DOB"));  
-					    a.setDOB(strDate);
+//					   System.out.println("fsdgsgksjdggnkjdngsjdnflandlgjnaljnldn");
+					
+					   String strDate = formatter.format(rs.getDate("DOB"));  
+//					   System.out.println(rs.getDate("DOB"));
+						
+					   a.setDOB(strDate);
 					    a.setEmail(rs.getString("email"));
 					    a.setPassword(rs.getString("password"));
 					    a.setPhone(rs.getString("phone"));
@@ -205,6 +209,7 @@ public class AdminDao {
 			}
 			else
 			{
+				
 				return a;
 			}
 		}

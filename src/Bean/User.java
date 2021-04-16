@@ -8,8 +8,17 @@ public class User  implements PersonDataInterface
 	 String password="";
 	 String Gender="";
 	 String Address="";
+	 int Booktickets;
 
-	 int UserId;
+	 public int getBooktickets() {
+		return Booktickets;
+	}
+
+	public void setBooktickets(int booktickets) {
+		Booktickets = booktickets;
+	}
+
+	int UserId;
 	 String UserName;
 	
 	public int getUserId() {

@@ -54,7 +54,7 @@ public class AdminEnterDetail
 		admin.setBankName(BankName);
 		admin.setAccountName(AccountName);
 		admin.setAccountNo(AccountNumber);
-		sc.close();
+//		sc.close();
 		
 		int validationCheck = Filter.AdminDetailFilter.ValidationAdmin(admin);
 

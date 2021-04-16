@@ -6,6 +6,9 @@ public class UserPayment extends User
 	String AccountNo;
 	String AccountName;
 	Float Price;
+	
+	
+	
 	public String getBankName() {
 		return BankName;
 	}
