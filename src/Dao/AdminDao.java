@@ -214,5 +214,72 @@ public class AdminDao {
 		}
 		return null;
 	}
+
+	public static boolean UpdateAdminTable(AdminPayment a) 
+	{
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("update admin set  AdminName=? ,  DOB=? , password=? , Gender=? , Address=? where adminId = ?");
+			
+				) 
+		{
+			
+			pstmt.setString(1,a.getAdminName());
+			pstmt.setString(2,a.getDOB());
+			pstmt.setString(3, a.getPassword());
+			pstmt.setString(4, a.getGender());
+			pstmt.setString(5, a.getAddress());
+			pstmt.setInt(6, a.getAdminId());
+			
+			// getting the adminid from table and storing it into admin class (admin)
+			//pstmt2.setString(1,a.getEmail());
+			//pstmt2.setString(2,a.getPassword());
+			int i=pstmt.executeUpdate();
+			
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean UpdateAdminPaymentTable(AdminPayment a) 
+	{
+
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("update  adminpayment set AccountNo = ? , Bankname = ? , AccountName = ? where  AdminId = ?");
+				) 
+		{
+			
+			pstmt.setString(1,a.getAccountNo());
+			pstmt.setString(2,a.getBankName());
+			pstmt.setString(3, a.getAccountName());
+			pstmt.setInt(4, a.getAdminId());
+			//nd storing it into admin class (admin)
+			//pstmt2.setString(1,a.getEmail());
+			//pstmt2.setString(2,a.getPassword());
+			int i=pstmt.executeUpdate();
+			
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 }

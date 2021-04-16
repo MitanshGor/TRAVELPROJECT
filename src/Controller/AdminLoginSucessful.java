@@ -1,5 +1,6 @@
 package Controller;
 
+import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,22 +12,24 @@ public class AdminLoginSucessful
 {
 	public static void AdminLoginSucessfulMethod(AdminPayment a)
 	{
-		Scanner sc=new Scanner(System.in);
 		WhileLoop: while(true)
 		{
+			Scanner sc=new Scanner(System.in);
+			
 			System.out.println("1--------create Package");				/////////////////DONE
-			System.out.println("2--------Edit/Update Package");
-			System.out.println("3--------Remove Package");						
+			System.out.println("2--------Edit/Update Package");				////////////////Done
+			System.out.println("3--------Remove Package");					///////////////// DONE	
 			System.out.println("4--------View My Details");				///////////////////////DONE
 			System.out.println("5--------View My Customers");			
 			System.out.println("6--------View My Packages");			////////////////////////DONE
-			System.out.println("7--------Go Back");
+			System.out.println("7--------Update My details");			//////////////////////Done
+			System.out.println("8--------Go Back");
 			System.out.println("Enter Your choice :");
 			int choice=sc.nextInt();
 			switch(choice)
 			{
 			case 1:
-					boolean b =Controller.PackageDetails.PackageDetailsData(a.getAdminId());
+					boolean b =PackageDetails.PackageDetailsData(a.getAdminId());
 					if(b==true)
 					{
 						System.out.println("Package Sucessfully enterd into database  !!");
@@ -62,7 +65,11 @@ public class AdminLoginSucessful
 									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%35s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getAddress());
 									}
 								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+								System.out.println("Enter PackageId from table which you want to edit : ");
+								int EditId=sc.nextInt();
+								boolean ans = PackageDetails.PackageDetailsData(a.getAdminId(),EditId);
 								
+										
 								
 								
 				}
@@ -193,24 +200,26 @@ public class AdminLoginSucessful
 									System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 									
 									
-									
 					}
 					else
 					{
 						System.out.println("You dont have any packages available please create it   !!!");
 					}
-				break;
+				break;	
 			case 7:
+				AdminEnterDetail aed =new AdminEnterDetail();
+				 aed.AdminEnterDetail(a.getAdminId());
+				break;
+			case 8:
 				break WhileLoop;
 			default :	System.out.println("Wrong choice entered");
 			}
 		}
-		sc.close();
 	}
 	
 	public static void main(String[] args) {
 		AdminPayment a =new AdminPayment();
 		a.setAdminId(16);
-		AdminLoginSucessful.AdminLoginSucessfulMethod(a);
-		}
+		AdminLoginSucessful.AdminLoginSucessfulMethod(a);	
+	}
 }

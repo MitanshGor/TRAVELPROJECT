@@ -161,14 +161,8 @@ public class PackageDetails
 		System.out.println("No of Tickets Available ("+pc.getNoOfTicketsAvailable()+") : ");          //
 		int ticketsAvailable=sc.nextInt();
 
-		Transportation t=new Transportation();
-		
 		
 		// country noOfPeople noOfDays  ticketsAvailable
-		t.setNoOfTicketsAvailable(ticketsAvailable);
-		t.setCountry(Country);
-		//t.setPackageId(noOfPeople);
-		t.setPeriod_days(noOfDays);
 		System.out.println("********************USER Transportation***************************\n");
 		
 		System.out.println("Enter Mode Of Transportation ("+tc.getModeOfTransportation()+") (1---Bus | 2--Train | 3--Flight ) : ");
@@ -182,10 +176,7 @@ public class PackageDetails
 		float price=sc.nextFloat();
 		
 		
-		t.setArivalDate(ArrivalDate);
-		t.setDepartureDate(DepartureDate);
-		t.setModeOfTransportation(modeOfTrtportation);
-		t.setPrice(price);
+	
 		
 		System.out.println("********************Enter Hotel***************************\n");
 		System.out.println("Enter Star Type ("+hc.getStarType()+") ( /5): ");
@@ -202,7 +193,21 @@ public class PackageDetails
 		System.out.println("Enter Price per Night ("+hc.getPricePerNight()+"): ");
 		float PricePerNight=sc.nextFloat();
 		
+		
+		Transportation t=new Transportation();
+	
+		t.setNoOfTicketsAvailable(ticketsAvailable);
+		t.setCountry(Country);
+		//t.setPackageId(noOfPeople);
+		t.setPeriod_days(noOfDays);
+		
+		t.setArivalDate(ArrivalDate);
+		t.setDepartureDate(DepartureDate);
+		t.setModeOfTransportation(modeOfTrtportation);
+		t.setPrice(price);
+		
 		Hotel h=new Hotel();
+
 		h.setPackageId(t.getPackageId());
 		h.setName(Hotelname);
 		h.setStarType(StarType);
@@ -223,19 +228,26 @@ public class PackageDetails
 	if(n==0)
 	{
 		
-		int packageId=Dao.PackageDao.setPackageTable(t, adminId);
-		Dao.transportationDao.setTransportationDetailsSql(t,packageId);	
-		Dao.HotelDao.setHotelDetailsSql(h,packageId);
-
-		if(packageId==0)
+		int packageId=pId;
+		boolean b1 = Dao.transportationDao.UpdateTransportationDetailsSql(t,packageId);	
+		boolean b2 = Dao.HotelDao.UpdateHotelDetailsSql(h,packageId);
+		boolean b3 = Dao.PackageDao.UpdatePackageDetailsSql(t,packageId);
+		if(b1 && b2 && b3)
 		{
-			System.out.println("Exception occoured !!!. Detail is not enetered into database");
+			System.out.println("Data updated Sucessfully !!");
+			return true;
+		}
+		else if(!b1 && !b2 && !b3)
+		{
+			
+			System.out.println("None of the data is changed so please update data again !!");
 			return false;
 		}
 		else
 		{
-			return true;
-		}	
+			System.out.println("Only some of the data is changed so please update data again !!");
+			return false;
+		}
 	}
 	else
 	{

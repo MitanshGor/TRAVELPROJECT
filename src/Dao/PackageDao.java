@@ -145,4 +145,36 @@ public class PackageDao {
 		}
 	return null;	
 	}	
+
+
+	public static boolean UpdatePackageDetailsSql(Transportation t,int packageId)
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt1=con.prepareStatement("update package set TicketsAvailable=? ,  Country=?   ,  PeriodDay=?  where packageId=?");
+			)
+		{
+			pstmt1.setInt(1,t.getNoOfTicketsAvailable());
+			pstmt1.setString(2, t.getCountry());
+			pstmt1.setInt(3,t.getPeriod_days());
+			pstmt1.setInt(4,packageId);
+			
+			
+			int i=pstmt1.executeUpdate();
+			if(i==0)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

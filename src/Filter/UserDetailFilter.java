@@ -49,7 +49,7 @@ public class UserDetailFilter {
 		
 			empty ++;
 		}
-		if(UserDetailFilter.checkString(a.getUserName())==false  || UserDetailFilter.checkStringOnlyRegex(a.getUserName())==false)
+		if(UserDetailFilter.checkString(a.getAccountNo())==false  || UserDetailFilter.checkStringOnlyRegex(a.getAccountNo())==false)
 		{
 			System.out.println("Invalid  Username = "+a.getUserName());
 			empty ++;

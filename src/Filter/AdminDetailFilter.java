@@ -62,7 +62,7 @@ public class AdminDetailFilter {
 			empty ++;
 		}
 		
-		if(AdminDetailFilter.checkString(a.getAccountNo()))
+		if(AdminDetailFilter.checkStringAndNumberRegex(a.getAccountNo())==false && AdminDetailFilter.checkString(a.getAccountNo())==false)
 		{	System.out.println("Invalid  Account number = " +a.getAccountNo());
 		
 			empty ++;
@@ -121,9 +121,9 @@ public class AdminDetailFilter {
 		return s.toUpperCase().equals("M") || s.toUpperCase().equals("F");
 		
 	}
-//	public static void main(String[] args) {
-//		AdminDetailFilter a=new AdminDetailFilter();
-//		System.out.println(a.checkStringAndNumberRegex("Address A-202"));
-//	}
+	public static void main(String[] args) {
+		AdminDetailFilter a=new AdminDetailFilter();
+		System.out.println(a.checkStringAndNumberRegex("34554"));
+	}
 }
 

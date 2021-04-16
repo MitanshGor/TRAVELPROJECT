@@ -111,7 +111,7 @@ public class HotelDao {
 		try (
 				Connection con = JDBCConnection.getConnection();
 				PreparedStatement pstmt = con
-						.prepareStatement("select * from Transportation where packageId=?");
+						.prepareStatement("select * from hotel where packageId=?");
 			) 
 		{	
 			//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
@@ -120,7 +120,9 @@ public class HotelDao {
 		ResultSet rs=pstmt.executeQuery();
 		while(rs.next())
 		{
-			SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-mm-dd");
+			
+			
 			String cidate = givenDate.format(rs.getDate("checkin"));
 			String codate = givenDate.format(rs.getDate("checkout"));
 
@@ -139,5 +141,39 @@ public class HotelDao {
 			e.printStackTrace();
 		}
 	return null;	
+	}
+	
+
+
+	public static boolean UpdateHotelDetailsSql(Hotel t,int packageId)
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt1=con.prepareStatement("update hotel set  HotelName=? , startype=? , checkin=str_to_date(?,'%Y-%m-%d') , checkOut=str_to_date(?,'%Y-%m-%d') , HotelAddress=? , pricePerNight=? where packageId=?");
+			)
+		{
+			pstmt1.setString(1,t.getName());
+			pstmt1.setInt(2, t.getStarType());
+			pstmt1.setString(3,t.getChceckinDate());
+			pstmt1.setString(4,t.getChceckoutDate());
+			pstmt1.setString(5,t.getAddress());
+			pstmt1.setDouble(6,t.getPricePerNight());
+			pstmt1.setInt(7,packageId);
+			
+			int i=pstmt1.executeUpdate();
+			if(i==0)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

@@ -131,6 +131,36 @@ public class transportationDao {
 					e.printStackTrace();
 				}
 			return null;	
-	}	
+	}
+
+	public static boolean UpdateTransportationDetailsSql(Transportation t,int packageId)
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt1=con.prepareStatement("update transportation set modeOfTransportation=? , ArrivalDate=str_to_date(?,'%Y-%m-%d') , DeparturDate=str_to_date(?,'%Y-%m-%d') , price=? where packageId=?");
+			)
+		{
+			pstmt1.setInt(1,t.getModeOfTransportation());
+			pstmt1.setString(2, t.getArivalDate());
+			pstmt1.setString(3,t.getDepartureDate());
+			pstmt1.setDouble(4,t.getPrice());
+			pstmt1.setInt(5,packageId);
+				
+			int i=pstmt1.executeUpdate();
+			if(i==0)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
