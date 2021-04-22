@@ -5,9 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import Bean.AdminPayment;
 import Bean.User;
+import Bean.UserPackage;
 import Bean.UserPayment;
 import Util.JDBCConnection;
 
@@ -222,6 +224,66 @@ public class UserDao {
 			 e.printStackTrace();
 		 }
 		return 0;
+	}
+	public static ArrayList<UserPackage> getAllUserPackageDetail( int userId )
+	{
+		 try(
+				 Connection con=JDBCConnection.getConnection();
+				 PreparedStatement pstmt=con.prepareStatement("select * from userpackage where userId=?");
+				 )
+		 {
+			 pstmt.setInt(1, userId);//(userId);
+			 
+			 ResultSet rs=pstmt.executeQuery();
+			 ArrayList<UserPackage> al=new ArrayList<UserPackage>();
+			 UserPackage u;
+			 while(rs.next())
+			 {
+				 u=new UserPackage();
+				 u.setNoofticket(rs.getInt("noOfTicket"));
+				 u.setPackageId(rs.getInt("PackageId"));
+				 u.setUserId(rs.getInt("UserId"));
+				 u.setTotalprice(rs.getFloat("totalPrice"));
+				 
+				 al.add(u);
+			 }
+			 return al;
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		return null;
+	}
+	public static ArrayList<UserPackage> getAllUserPackageDetailbyPackageId( int packageId)
+	{
+		 try(
+				 Connection con=JDBCConnection.getConnection();
+				 PreparedStatement pstmt=con.prepareStatement("select * from userpackage where packageId=?");
+				 )
+		 {
+			 pstmt.setInt(1, packageId);//(userId);
+			 
+			 ResultSet rs=pstmt.executeQuery();
+			 ArrayList<UserPackage> al=new ArrayList<UserPackage>();
+			 UserPackage u;
+			 while(rs.next())
+			 {
+				 u=new UserPackage();
+				 u.setNoofticket(rs.getInt("noOfTicket"));
+				 u.setPackageId(rs.getInt("PackageId"));
+				 u.setUserId(rs.getInt("UserId"));
+				 u.setTotalprice(rs.getFloat("totalPrice"));
+				 
+				 al.add(u);
+			 }
+			 return al;
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		return null;
 	}
 	public static boolean setUserPackagetable(float total , int userId , int packageId , int noOftickets) {
 

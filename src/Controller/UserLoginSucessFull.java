@@ -8,17 +8,22 @@ import Bean.AdminPayment;
 import Bean.Hotel;
 import Bean.Package;
 import Bean.Transportation;
+import Bean.UserPackage;
 import Bean.UserPayment;
+import Dao.HotelDao;
+import Dao.PackageDao;
 import Dao.UserDao;
+import Dao.transportationDao;
 
 public class UserLoginSucessFull 
 {
 	public static void UserLoginSucessfulMethod(UserPayment a)
 	{
-			
-				Scanner sc=new Scanner(System.in);
-			while(true)
+		Scanner sc=new Scanner(System.in);
+		
+			UserWhile: while(true)
 			{
+				
 				System.out.println("1-----------------Pacakge");
 													//1-----All packages
 													//1-----Country
@@ -164,20 +169,59 @@ public class UserLoginSucessFull
 					
 					break;
 				case 4:
-					
+						ArrayList<UserPackage>  up=UserDao.getAllUserPackageDetail(a.getUserId());
+						if(up!=null)
+						{
+							System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+							System.out.printf("%-12sCountry","");
+			
+							System.out.printf("%12sPeriodOfDays","");
+							System.out.printf("%-12sModeOfTransportation","");
+							System.out.printf("%-12sArrival","");
+							System.out.printf("%12sDeparture","");
+
+							System.out.printf("%12sTransportPrice","");
+							System.out.printf("%-12sHotelName","");
+							System.out.printf("%-12sHotelAddress","");
+							System.out.printf("%12sCheckIn","");
+							System.out.printf("%-12sCheckOut","");
+							System.out.printf("%-12sHotelPrice","");
+							System.out.printf("%-12sNoOfTicket","");
+							System.out.printf("%-12sTotalPrice","");
+							
+					System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+										
+							for(UserPackage u : up)
+							{
+//								System.out.println("---------->"+u.getPackageId()+"\n");
+								Package p = PackageDao.getPacakgeFromPackageID(u.getPackageId());
+								Transportation t = transportationDao.getTransportationDetailOfPackage(u.getPackageId());
+								Hotel h=HotelDao.getHotelFromPackageID(u.getPackageId());
+								
+								System.out.printf("%17s%23s%25s%31s%20s%23s%23s%23s%19s%20s%20s%22s%23s%n",p.getCountry(),p.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getAddress(),h.getChceckinDate(),h.getChceckoutDate(),h.getTotalPrice(),u.getNoofticket(),u.getTotalprice());
+							}
+							System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+												 
+						}
+						else
+						{
+							System.out.println("You dont have any packages !!!");
+						}
 					break;
 				case 5:
 						int i = UserDao.getUsersTotalPriceAndName(a.getUserId());
 						if(i>0)
 						{
-							System.out.println(a.getUserName() + " , You  have invested " + i + " Rs in travelAgency .");
+							System.out.println(a.getUserName() + " , You  have booked packges of worth " + i + "/. Rs .");
 						}
 						else
 						{
-							System.out.println(a.getUserName() + " , You  have added any package to your cart !!");
+							System.out.println(a.getUserName() + " , You  have not added any package to your cart !!");
 						}
 					break;
-			}
+				case 6 :
+					break UserWhile;
+				}
 		}
 	}	
 	public static void main(String[] args) 

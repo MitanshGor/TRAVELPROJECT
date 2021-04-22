@@ -5,7 +5,13 @@ import java.util.Scanner;
 
 import Bean.AdminPayment;
 import Bean.Hotel;
+import Bean.Package;
 import Bean.Transportation;
+import Bean.User;
+import Bean.UserPackage;
+import Bean.UserPayment;
+import Dao.PackageDao;
+import Dao.UserDao;
 
 public class AdminLoginSucessful 
 {
@@ -170,6 +176,45 @@ public class AdminLoginSucessful
 
 				break;
 			case 5:
+				ArrayList<Package> packages=PackageDao.getAllPackageOfAdminId(a.getAdminId());
+				if(packages!=null)
+				{
+					System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+//																																											---------------------------------------
+					System.out.printf("%-12sPacakgeId","");
+	
+	//				--
+					System.out.printf("%12sName","");
+					System.out.printf("%-12sDOB","");
+					System.out.printf("%-12sEmail","");
+//					--
+					System.out.printf("%12sPhone","");
+					System.out.printf("%-12sGender","");
+					System.out.printf("%-12sAddress","");
+					
+					System.out.printf("%-12sAccountName","");
+					System.out.printf("%-12sBankName","");
+					System.out.printf("%-12sNoOfTicket","");
+					System.out.printf("%-12stotalPrice","");
+
+					System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+											
+					for(Package p : packages)
+					{
+						ArrayList<UserPackage> userpackages = UserDao.getAllUserPackageDetailbyPackageId(p.getPackageId());
+						if(userpackages!=null)
+						{
+							for(UserPackage up : userpackages)
+							{
+								User u = UserDao.GetUserDetails(up.getUserId());
+								UserPayment upay = UserDao.GetUserDetails(up.getUserId());
+								System.out.printf("%17s%17s%20s%20s%17s%10s%23s%22s%19s%21s%24s%n",p.getPackageId(),u.getUserName(),u.getDob(),u.getEmail(),u.getPhone(),u.getGender(),u.getAddress(),upay.getAccountName(),upay.getBankName(),up.getNoofticket(),up.getTotalprice());
+							}
+						}
+					}
+					System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+											
+				}
 				break;
 			case 6:
 					ArrayList<Bean.Package> p = Dao.PackageDao.getAllPackageOfAdminId(a.getAdminId());
