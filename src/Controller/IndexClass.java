@@ -71,22 +71,22 @@ public class IndexClass {
 									boolean b=ud.UserEnterDetail();
 									if(b==true) 
 									{
-										System.out.println("Login Sucessful");
+										System.out.println("Signup Sucessful");
 									}
 									else
 									{
-										System.out.println("Login Un-Sucessful");	
+										System.out.println("Signup Un-Sucessful");	
 									}
 							break;
 						case 2:
 									if(Login.UserLogindetails()==null)
 									{
-										System.out.println("Loged perfefectly User");	
+										System.out.println("Login details Invalid");	
 									}
 									else
 									{
 										UserPayment a = Login.UserLogindetails();
-									
+										UserLoginSucessFull.UserLoginSucessfulMethod(a);
 									}
 										
 							break;

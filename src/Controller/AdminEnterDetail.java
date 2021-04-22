@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import Bean.Admin;
 import Bean.AdminPayment;
+import Bean.UserPayment;
 import Dao.AdminDao;
 import Util.JDBCConnection;
 
@@ -168,5 +169,14 @@ public class AdminEnterDetail
 //				return false;
 			}
 		}
+
+	
+	
+	public static void main(String[] args) {
+		AdminEnterDetail u=new AdminEnterDetail();
+		AdminPayment uv=new AdminPayment();
+//		uv.setUserId(3);
+		u.AdminEnterDetail(16);
+	}
 
 }

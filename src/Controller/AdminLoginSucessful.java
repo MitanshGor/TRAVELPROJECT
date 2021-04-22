@@ -1,6 +1,5 @@
 package Controller;
 
-import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,10 +11,11 @@ public class AdminLoginSucessful
 {
 	public static void AdminLoginSucessfulMethod(AdminPayment a)
 	{
+	
+		Scanner sc=new Scanner(System.in);
 		WhileLoop: while(true)
 		{
-			Scanner sc=new Scanner(System.in);
-			
+		
 			System.out.println("1--------create Package");				/////////////////DONE
 			System.out.println("2--------Edit/Update Package");				////////////////Done
 			System.out.println("3--------Remove Package");					///////////////// DONE	
@@ -40,7 +40,7 @@ public class AdminLoginSucessful
 				ArrayList<Bean.Package> ppp = Dao.PackageDao.getAllPackageOfAdminId(a.getAdminId());
 				if(ppp.size()!=0)
 				{
-								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+								System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 										System.out.printf("PackageId%-10sTicketsAvailable","");
 										System.out.printf("%12sCountry","");
 										System.out.printf("%-12sPeriodOfDays","");
@@ -56,15 +56,16 @@ public class AdminLoginSucessful
 										System.out.printf("%-12sCheckin","");
 										System.out.printf("%12sCheckOut","");
 										System.out.printf("%-12sPricePErNight","");
+										System.out.printf("%-12sTotal Price","");
 										System.out.printf("%-12sHotelAddress","");
-										System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+										System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 								for(Bean.Package p1 : ppp)
 								{
 									Transportation t =Dao.transportationDao.getTransportationDetailOfPackage(p1.getPackageId()); 	
 									Hotel h =Dao.HotelDao.getHotelDetailOfPackage(p1.getPackageId());
-									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%35s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getAddress());
+									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%24s%24s%20s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getTotalPrice(),h.getAddress());
 									}
-								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+								System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 								System.out.println("Enter PackageId from table which you want to edit : ");
 								int EditId=sc.nextInt();
 								boolean ans = PackageDetails.PackageDetailsData(a.getAdminId(),EditId);
@@ -85,7 +86,7 @@ public class AdminLoginSucessful
 				ArrayList<Integer> ar=new ArrayList<Integer>();
 				if(pp.size()!=0)
 				{
-								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 										System.out.printf("PackageId%-10sTicketsAvailable","");
 										System.out.printf("%12sCountry","");
 										System.out.printf("%-12sPeriodOfDays","");
@@ -100,17 +101,18 @@ public class AdminLoginSucessful
 										System.out.printf("%-12sStarType","");
 										System.out.printf("%-12sCheckin","");
 										System.out.printf("%12sCheckOut","");
-										System.out.printf("%-12sPricePErNight","");
+										System.out.printf("%-12sPricePerNight","");
+										System.out.printf("%-12sTotalPrice","");
 										System.out.printf("%-12sHotelAddress","");
-										System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+										System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 								for(Bean.Package p1 : pp)
 								{
 									ar.add(p1.getPackageId());
 									Transportation t =Dao.transportationDao.getTransportationDetailOfPackage(p1.getPackageId()); 	
 									Hotel h =Dao.HotelDao.getHotelDetailOfPackage(p1.getPackageId());
-									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%35s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getAddress());
+									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%24s%25s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getTotalPrice(),h.getAddress());
 								}
-								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				
 								System.out.println("Enter package id from Above list which you want to delete : ");
 								int PackageID=sc.nextInt();
@@ -173,7 +175,8 @@ public class AdminLoginSucessful
 					ArrayList<Bean.Package> p = Dao.PackageDao.getAllPackageOfAdminId(a.getAdminId());
 					if(p.size()!=0)
 					{
-									System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+									System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+											+ "");
 											System.out.printf("PackageId%-10sTicketsAvailable","");
 											System.out.printf("%12sCountry","");
 											System.out.printf("%-12sPeriodOfDays","");
@@ -188,18 +191,17 @@ public class AdminLoginSucessful
 											System.out.printf("%-12sStarType","");
 											System.out.printf("%-12sCheckin","");
 											System.out.printf("%12sCheckOut","");
-											System.out.printf("%-12sPricePErNight","");
+											System.out.printf("%-12sPricePerNight","");
+											System.out.printf("%-12sTotalPrice","");
 											System.out.printf("%-12sHotelAddress","");
-											System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+											System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 									for(Bean.Package p1 : p)
 									{
-										Transportation t =Dao.transportationDao.getTransportationDetailOfPackage(p1.getPackageId()); 	
-										Hotel h =Dao.HotelDao.getHotelDetailOfPackage(p1.getPackageId());
-										System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%35s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getAddress());
+											Transportation t =Dao.transportationDao.getTransportationDetailOfPackage(p1.getPackageId()); 	
+											Hotel h =Dao.HotelDao.getHotelDetailOfPackage(p1.getPackageId());
+											System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%20s%20s%30s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getTotalPrice(),h.getAddress());
 										}
-									System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-									
-									
+									System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 					}
 					else
 					{
@@ -219,7 +221,7 @@ public class AdminLoginSucessful
 
 	public static void main(String[] args) {
 		AdminPayment a =new AdminPayment();
-		a.setAdminId(14);
+		a.setAdminId(15);
 		AdminLoginSucessful.AdminLoginSucessfulMethod(a);	
 	}
 }

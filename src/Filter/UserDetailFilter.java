@@ -14,12 +14,11 @@ public class UserDetailFilter {
 			System.out.println("Invalid  Password = "+a.getPassword());
 					empty ++;
 		}
-		if(UserDetailFilter.checkString(a.getUserName())==false  || UserDetailFilter.checkStringOnlyRegex(a.getUserName())==false)
+		if(UserDetailFilter.checkString(a.getUserName())==false || UserDetailFilter.checkStringOnlyRegex(a.getUserName())==false)
 		{
 			System.out.println("Invalid  Username = "+a.getUserName());
 			empty ++;
 		}
-		
 		if(UserDetailFilter.checkString(a.getEmail())==false || UserDetailFilter.checkEmailRegex(a.getEmail())==false)
 		{	System.out.println("Invalid  Email = "+a.getEmail());
 		
@@ -49,9 +48,9 @@ public class UserDetailFilter {
 		
 			empty ++;
 		}
-		if(UserDetailFilter.checkString(a.getAccountNo())==false  || UserDetailFilter.checkStringOnlyRegex(a.getAccountNo())==false)
+		if(UserDetailFilter.checkString(a.getAccountNo())==false  || UserDetailFilter.checkStringAndNumberRegex(a.getAccountNo())==false)
 		{
-			System.out.println("Invalid  Username = "+a.getUserName());
+			System.out.println("Invalid  AccountNo = "+a.getAccountNo());
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getAccountName())==false|| UserDetailFilter.checkStringOnlyRegex(a.getAccountName())==false )
@@ -74,6 +73,7 @@ public class UserDetailFilter {
 	{
 		if(s.trim().length()==0 || s==null)
 		{
+			
 			return false;
 		}
 		else
@@ -86,6 +86,8 @@ public class UserDetailFilter {
 		String regex="[a-zA-Z ]+";	
 		return Pattern.matches(regex,s)  ;
 	}
+	
+	
 	public static boolean checkStringAndNumberRegex(String s)
 	{
 		String regex="[ a-zA-Z0-9\\!@#$%^&*_-]+";	
@@ -117,8 +119,9 @@ public class UserDetailFilter {
 		return s.toUpperCase().equals("M") || s.toUpperCase().equals("F");
 		
 	}
-//	public static void main(String[] args) {
-//		UserDetailFilter a=new UserDetailFilter();
-//		System.out.println(a.checkStringAndNumberRegex("Address A-202"));
-//	}
+	public static void main(String[] args) {
+		UserDetailFilter a=new UserDetailFilter();
+		System.out.println(a.checkStringOnlyRegex("Mitansh"));
+		System.out.println(a.checkString("Mitansh"));
+	}
 }

@@ -48,31 +48,31 @@ public class PackageDao {
 	return 0;
 	}
 
-	public static ArrayList<Bean.Package> getAllPackageOfAdminId(int adminId) {
+public static ArrayList<Package> getAllPackageOfAdminId(int adminId) {
 		
 		try(
 				
 				Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("select * from package where adminId=?");
+				PreparedStatement pstmt = con.prepareStatement("select * from package where adminId=? order by packageId asc");
 				)
 		{
 			pstmt.setInt(1,adminId);
 			ResultSet rs=pstmt.executeQuery();
 			
-			ArrayList<Bean.Package>  alPack =new ArrayList<Package>();
+			ArrayList<Package>  alPack =new ArrayList<Package>();
 			Package p ;
 			while(rs.next())
 			{
 				 p = new Package();
 
-				p.setUserId(rs.getInt("UserId"));
+			
 				p.setPackageId(rs.getInt("Packageid"));
 				p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
 				p.setCountry(rs.getString("country"));
 				p.setPeriod_days(rs.getInt("PeriodDay"));
 				
 				alPack.add(p);
-				p=null;
+				
 			}
 			return alPack;
 		}
@@ -83,6 +83,148 @@ public class PackageDao {
 		}
 		return null;
 	}
+
+public static ArrayList<Package> getAllPackageOfAdminId() {
+	
+	try(
+			
+			Connection con=JDBCConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from package");
+			)
+	{
+//		pstmt.setInt(1,adminId);
+		ResultSet rs=pstmt.executeQuery();
+		
+		ArrayList<Package>  alPack =new ArrayList<Package>();
+		Package p ;
+		while(rs.next())
+		{
+			 p = new Package();
+
+
+			p.setPackageId(rs.getInt("Packageid"));
+			p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
+			p.setCountry(rs.getString("country"));
+			p.setPeriod_days(rs.getInt("PeriodDay"));
+			
+			alPack.add(p);
+			
+		}
+		return alPack;
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		
+	}
+	return null;
+}
+public static ArrayList<Package> getAllPackageOfCountry(String country) {
+	
+	try(
+			
+			Connection con=JDBCConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from package where country =? ");
+			)
+	{
+		pstmt.setString(1,country);
+		ResultSet rs=pstmt.executeQuery();
+		
+		ArrayList<Package>  alPack =new ArrayList<Package>();
+		Package p ;
+		while(rs.next())
+		{
+			 p = new Package();
+
+
+			p.setPackageId(rs.getInt("Packageid"));
+			p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
+			p.setCountry(rs.getString("country"));
+			p.setPeriod_days(rs.getInt("PeriodDay"));
+			
+			alPack.add(p);
+			
+		}
+		return alPack;
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		
+	}
+	return null;
+}
+public static ArrayList<Package> getAllPackageOfModeofTransportation(int mot) {
+	
+	try(
+			
+			Connection con=JDBCConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from package where country =? ");
+			)
+	{
+		pstmt.setInt(1,mot);
+		ResultSet rs=pstmt.executeQuery();
+		
+		ArrayList<Package>  alPack =new ArrayList<Package>();
+		Package p ;
+		while(rs.next())
+		{
+			 p = new Package();
+
+
+			p.setPackageId(rs.getInt("Packageid"));
+			p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
+			p.setCountry(rs.getString("country"));
+			p.setPeriod_days(rs.getInt("PeriodDay"));
+			
+			alPack.add(p);
+			
+		}
+		return alPack;
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		
+	}
+	return null;
+}
+public static ArrayList<Package> getAllPackageOfTicketAvailable() {
+	
+	try(
+			
+			Connection con=JDBCConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from package where TicketsAvailable > 0 ");
+			)
+	{
+//		pstmt.setInt(1,);
+		ResultSet rs=pstmt.executeQuery();
+		
+		ArrayList<Package>  alPack =new ArrayList<Package>();
+		Package p ;
+		while(rs.next())
+		{
+			 p = new Package();
+
+
+			p.setPackageId(rs.getInt("Packageid"));
+			p.setNoOfTicketsAvailable(rs.getInt("TicketsAvailable"));
+			p.setCountry(rs.getString("country"));
+			p.setPeriod_days(rs.getInt("PeriodDay"));
+			
+			alPack.add(p);
+			
+		}
+		return alPack;
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		
+	}
+	return null;
+}
+
 
 	public static void DeleteSpecificPackage(int packageID) 
 	{
@@ -149,6 +291,7 @@ public class PackageDao {
 
 	public static boolean UpdatePackageDetailsSql(Transportation t,int packageId)
 	{
+		
 		try(
 				Connection con=JDBCConnection.getConnection();
 				PreparedStatement pstmt1=con.prepareStatement("update package set TicketsAvailable=? ,  Country=?   ,  PeriodDay=?  where packageId=?");
@@ -175,6 +318,30 @@ public class PackageDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	
+	
+
+	public static void UpdateTicketsFromPackage(int noOfTicekts,int packageId)
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt1=con.prepareStatement("update package set TicketsAvailable=TicketsAvailable-?   where packageId=?");
+			)
+		{
+			
+			pstmt1.setInt(1,noOfTicekts);
+			pstmt1.setInt(2,packageId);
+			
+			int i=pstmt1.executeUpdate();
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 
 }

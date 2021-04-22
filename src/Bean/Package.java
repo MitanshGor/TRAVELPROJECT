@@ -23,17 +23,10 @@ public class Package
 	String Country;
 	int Period_days;
 	int noOfTicketsAvailable;
-	float TotalPrice;
 
 
 	
-	
-	public float getTotalPrice() {
-		return TotalPrice;
-	}
-	public void setTotalPrice(float totalPrice) {
-		TotalPrice = totalPrice;
-	}
+
 	
 	public int getNoOfTicketsAvailable() {
 		return noOfTicketsAvailable;

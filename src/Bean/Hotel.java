@@ -17,8 +17,17 @@ public class Hotel extends Package
 	String chceckoutDate;
 	String address;
 	float pricePerNight;
+	float totalPrice;
 	
 	
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public String getName() {
 		return name;
 	}

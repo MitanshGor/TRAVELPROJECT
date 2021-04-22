@@ -157,5 +157,235 @@ public class UserDao {
 		return null;
 	}
 
-}
+	
+	
+	
+	
+	
+	
+	
+	public static boolean UpdateUserPackagetable(float total, int userId, int packageId, int noOftickets) 
+	{
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt=con.prepareStatement("update userPackage set totalPrice=totalPrice+?  , noOfTicket=noOfticket+? where packageID=? and userId=?");
+			)
+		{
+			pstmt.setFloat(1,total);
+			pstmt.setInt(2,noOftickets);
+			pstmt.setInt(3,packageId);
+			pstmt.setInt(4,userId);
+			int i= pstmt.executeUpdate();
+			 if(i>0)
+			 {
+				 return true;
+			 }
+			 else
+			 {
+				 return false;
+			 }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static int getAllUserPackageDetail( int userId , int packageId )
+	{
+		 try(
+				 Connection con=JDBCConnection.getConnection();
+				 PreparedStatement pstmt=con.prepareStatement("select * from userpackage where userId=? and packageId=?");
+				 )
+		 {
+			 pstmt.setInt(1, userId);//(userId);
+			 pstmt.setInt(2, packageId);//(userId);
+			 
+			 ResultSet rs=pstmt.executeQuery();
+			 int count=0;
+			 while(rs.next())
+			 {
+				 count++;
+			 }
+			 if(count>0)
+			 {
+				 return 1;
+			 }
+			 else
+			 {
+				 return 0;
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		return 0;
+	}
+	public static boolean setUserPackagetable(float total , int userId , int packageId , int noOftickets) {
 
+
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("insert into userpackage(packageId,userId,noOfticket,totalPrice) values(?,?,?,?);");
+			) 
+		{
+			
+			
+			pstmt.setInt(1,packageId);
+			pstmt.setInt(2, userId);
+			pstmt.setInt(3, noOftickets);
+			pstmt.setFloat(4, total);
+			
+			int i=pstmt.executeUpdate();
+			
+			
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static UserPayment GetUserDetails(int userId) 
+	{
+		try
+			(
+					Connection con=JDBCConnection.getConnection();
+					PreparedStatement pstmt=con.prepareStatement(" select * from user join userpayment on (user.UserId = userpayment.userId) where user.userId=?");
+			)
+		{
+			pstmt.setInt(1, userId);
+			
+			ResultSet rs=pstmt.executeQuery();
+			
+			UserPayment u=new UserPayment();
+			while(rs.next())
+			{
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+				   String strDate = formatter.format(rs.getDate("DOB"));  
+				
+				u.setUserId(rs.getInt("UserId"));
+				u.setUserName(rs.getString("UserName"));
+				u.setDob(strDate);
+				u.setEmail(rs.getString("Email"));
+				u.setPassword(rs.getString("Password"));
+				u.setPhone(rs.getString("phone"));
+				u.setGender(rs.getString("Gender"));
+				u.setAddress(rs.getString("Address"));
+				u.setAccountNo(rs.getString("AccountNo"));
+				u.setBankName(rs.getString("BankName"));
+				u.setAccountName(rs.getString("AccountName"));
+			}
+			
+			return u;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	
+	
+	public static boolean UpdateUserTable(UserPayment a) 
+	{
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("update user set  UserName=? ,  DOB=? , password=? , Gender=? , Address=? where userId = ?");
+			
+				) 
+		{
+			
+			pstmt.setString(1,a.getUserName());
+			pstmt.setString(2,a.getDob());
+			pstmt.setString(3, a.getPassword());
+			pstmt.setString(4, a.getGender());
+			pstmt.setString(5, a.getAddress());
+			pstmt.setInt(6, a.getUserId());
+			
+			// getting the adminid from table and storing it into admin class (admin)
+			//pstmt2.setString(1,a.getEmail());
+			//pstmt2.setString(2,a.getPassword());
+			int i=pstmt.executeUpdate();
+			
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean UpdateUserPaymentTable(UserPayment a) 
+	{
+
+		try (
+				Connection con = JDBCConnection.getConnection();
+				PreparedStatement pstmt = con
+						.prepareStatement("update  userpayment set AccountNo = ? , Bankname = ? , AccountName = ? where  UserId = ?");
+				) 
+		{
+			
+			pstmt.setString(1,a.getAccountNo());
+			pstmt.setString(2,a.getBankName());
+			pstmt.setString(3, a.getAccountName());
+			pstmt.setInt(4, a.getUserId());
+			//nd storing it into admin class (admin)
+			//pstmt2.setString(1,a.getEmail());
+			//pstmt2.setString(2,a.getPassword());
+			int i=pstmt.executeUpdate();
+			
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static int getUsersTotalPriceAndName(int userId) {
+		try(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt=con.prepareStatement("select totalPrice from userpackage where userId=?");
+				)
+		{
+			pstmt.setInt(1, userId);
+			int total=0;
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				total=total+rs.getInt("TotalPrice");
+			}
+			return total;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+		
+}

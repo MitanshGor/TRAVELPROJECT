@@ -17,7 +17,7 @@ public class HotelDao {
 	{
 		try(
 				Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("insert into hotel (Hotelname,startype,checkin,checkout,hotelAddress,pricePerNight,packageId) values (?,?,str_to_date(?,'%Y-%m-%d'),str_to_date(?,'%Y-%m-%d'),?,?,?);");
+				PreparedStatement pstmt = con.prepareStatement("insert into hotel (Hotelname,startype,checkin,checkout,hotelAddress,pricePerNight,packageId,totalPrice) values (?,?,str_to_date(?,'%Y-%m-%d'),str_to_date(?,'%Y-%m-%d'),?,?,?,DATEDIFF(str_to_date(?,'%Y-%m-%d'), str_to_date(?,'%Y-%m-%d'))*?);");
 				PreparedStatement pstmt2 = con.prepareStatement("select hotelid from hotel where packageid=? ");
 				)
 		{
@@ -29,15 +29,26 @@ public class HotelDao {
 			pstmt.setString(5, a.getAddress());
 			pstmt.setFloat(6, a.getPricePerNight());
 			pstmt.setInt(7, packageId);
+			
+			pstmt.setString(8,a.getChceckoutDate());
+			pstmt.setString(9, a.getChceckinDate());
+			pstmt.setFloat(10, a.getPricePerNight());
+			
+			
 			int i=pstmt.executeUpdate();
 		
 			//System.out.println("------------>"+a.getPackageId());
-			pstmt2.setInt(1,packageId);
-			ResultSet rs=pstmt2.executeQuery();
-			while(rs.next()) {
-				//System.out.println("--------------->"+ rs.getInt("HotelId"));
-			a.setHotelid(rs.getInt("HotelId"));
+			if(i==1)
+			{
+				pstmt2.setInt(1,packageId);
+				ResultSet rs=pstmt2.executeQuery();
+				while(rs.next()) 
+				{
+					//System.out.println("--------------->"+ rs.getInt("HotelId"));
+				a.setHotelid(rs.getInt("HotelId"));
+				}
 			}
+			
 //			if(i==0)
 //			{
 //				return null;
@@ -76,8 +87,10 @@ public class HotelDao {
 							t.setChceckinDate(cidate);
 							t.setChceckoutDate(codate);
 							t.setAddress(rs.getString("HotelAddress"));
+							t.setTotalPrice(rs.getFloat("totalPrice"));
 							t.setPricePerNight(rs.getFloat("pricePErNight"));
-							t.setPackageId(packageId);
+							
+							
 				}
 				return t;
 			}
@@ -131,6 +144,7 @@ public class HotelDao {
 			a.setChceckinDate(cidate);
 			a.setChceckoutDate(codate);
 			a.setPricePerNight(rs.getFloat("pricePerNight"));
+			a.setTotalPrice(rs.getFloat("totalPrice"));
 			a.setAddress(rs.getString("HotelAddress"));
 		}
 				
@@ -149,7 +163,14 @@ public class HotelDao {
 	{
 		try(
 				Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt1=con.prepareStatement("update hotel set  HotelName=? , startype=? , checkin=str_to_date(?,'%Y-%m-%d') , checkOut=str_to_date(?,'%Y-%m-%d') , HotelAddress=? , pricePerNight=? where packageId=?");
+				PreparedStatement pstmt1=con.prepareStatement(
+						"update hotel set  HotelName=? , "
+						+ "startype=? , "
+						+ "checkin=str_to_date(?,'%Y-%m-%d') , "
+						+ "checkOut=str_to_date(?,'%Y-%m-%d') , "
+						+ "HotelAddress=? , "
+						+ "pricePerNight=? , "
+						+ "totalPrice=DATEDIFF(str_to_date(?,'%Y-%m-%d'), str_to_date(?,'%Y-%m-%d'))*? where packageId=?");
 			)
 		{
 			pstmt1.setString(1,t.getName());
@@ -158,7 +179,14 @@ public class HotelDao {
 			pstmt1.setString(4,t.getChceckoutDate());
 			pstmt1.setString(5,t.getAddress());
 			pstmt1.setDouble(6,t.getPricePerNight());
-			pstmt1.setInt(7,packageId);
+			
+	
+			pstmt1.setString(7,t.getChceckoutDate());
+			pstmt1.setString(8, t.getChceckinDate());
+			pstmt1.setFloat(9, t.getPricePerNight());
+			
+			pstmt1.setInt(10,packageId);
+			
 			
 			int i=pstmt1.executeUpdate();
 			if(i==0)

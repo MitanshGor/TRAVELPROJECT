@@ -176,7 +176,7 @@ public class AdminDao {
 	{
 		try(
 			Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt=con.prepareStatement(" select * from admin join adminpayment on (admin.AdminId = adminpayment.AdminId) where admin.adminId=?;");	
+				PreparedStatement pstmt=con.prepareStatement(" select * from admin join adminpayment on (admin.AdminId = adminpayment.AdminId) where admin.adminId=?");	
 			)
 		{
 			pstmt.setInt(1,AdminId);
