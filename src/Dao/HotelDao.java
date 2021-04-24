@@ -110,6 +110,7 @@ public class HotelDao {
 		{
 			pstmt.setInt(1,packageID);
 			int i = pstmt.executeUpdate();
+//			System.out.println(i);
 			return i;
 		}
 		catch(Exception e)

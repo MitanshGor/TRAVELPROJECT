@@ -229,7 +229,8 @@ public static ArrayList<Package> getAllPackageOfTicketAvailable() {
 	public static void DeleteSpecificPackage(int packageID) 
 	{
 		int b = 0;
-		int a = Dao.transportationDao.DeleteSpecificTransportation(packageID);
+		int a = 0;
+		a=Dao.transportationDao.DeleteSpecificTransportation(packageID);
 		if(a==1)
 		{
 		 b= Dao.HotelDao.DeleteSpecificHotel(packageID);
@@ -239,7 +240,7 @@ public static ArrayList<Package> getAllPackageOfTicketAvailable() {
 				try(
 						Connection con=JDBCConnection.getConnection();
 						PreparedStatement pstmt = con.prepareStatement("delete from package where packageId=?;");
-						)
+					)
 				{
 					pstmt.setInt(1,packageID);
 					int i = pstmt.executeUpdate();

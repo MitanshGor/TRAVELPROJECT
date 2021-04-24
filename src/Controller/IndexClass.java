@@ -12,7 +12,7 @@ public class IndexClass {
 		int  adminChoice;
 		Scanner sc=new Scanner(System.in);
 		while(true)
-		{
+		{	System.out.println("-----------------------------------------------------------------------------------------");
 			System.out.println("1-----Admin ");
 			System.out.println("2-----User ");
 			int choice = sc.nextInt();
@@ -22,6 +22,7 @@ public class IndexClass {
 				case 1:
 						AdminWhile: while(true)
 						{
+							System.out.println("-----------------------------------------------------------------------------------------");
 							System.out.println("1-----Admin Signup ");
 							System.out.println("2-----Admin Login ");
 							System.out.println("3-----Go back");
@@ -41,15 +42,14 @@ public class IndexClass {
 											}	
 							break;
 							case 2:
-											if(Login.AdminLogindetails()==null)
+											AdminPayment a=Login.AdminLogindetails();
+											if(a==null)
 											{
 												System.out.println("Login Details Invalid");
 											}
 											else
 											{
-												AdminPayment a=Login.AdminLogindetails();
 												AdminLoginSucessful.AdminLoginSucessfulMethod(a);
-												
 											}
 							break;
 							case 3:
@@ -79,13 +79,14 @@ public class IndexClass {
 									}
 							break;
 						case 2:
-									if(Login.UserLogindetails()==null)
+									UserPayment a = Login.UserLogindetails();
+							
+									if(a==null)
 									{
 										System.out.println("Login details Invalid");	
 									}
 									else
 									{
-										UserPayment a = Login.UserLogindetails();
 										UserLoginSucessFull.UserLoginSucessfulMethod(a);
 									}
 										
@@ -97,7 +98,6 @@ public class IndexClass {
 				break;
 			
 				case 3 : 
-					sc.close();
 						System.exit(0);
 			}
 		}	

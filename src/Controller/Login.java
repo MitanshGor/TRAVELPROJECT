@@ -15,7 +15,7 @@ public class Login
 		String  email=sc.nextLine();
 		System.out.println("Enter Admin Password : ");
 		String  pass=sc.nextLine();
-		if(Filter.AdminDetailFilter.checkString(email) && Filter.AdminDetailFilter.checkStringOnlyRegex(email) && Filter.AdminDetailFilter.checkString(pass) && Filter.AdminDetailFilter.checkStringOnlyRegex(pass))
+		if(Filter.AdminDetailFilter.checkString(email) && Filter.AdminDetailFilter.checkEmailRegex(email) && Filter.AdminDetailFilter.checkString(pass) && Filter.AdminDetailFilter.checkStringAndNumberRegex(pass))
 		{
 			int i =Dao.AdminDao.getAdminFromEmailAndPass(email, pass);
 			AdminPayment a= Dao.AdminDao.GetAdminDetails(email, pass);

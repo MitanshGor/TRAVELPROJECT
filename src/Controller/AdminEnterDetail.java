@@ -59,7 +59,7 @@ public class AdminEnterDetail
 		
 		int validationCheck = Filter.AdminDetailFilter.ValidationAdmin(admin);
 
-		sc.close();	
+//		sc.close();	
 		if(validationCheck==0)
 			{
 				boolean b1 = Dao.AdminDao.setAdminTable(admin);

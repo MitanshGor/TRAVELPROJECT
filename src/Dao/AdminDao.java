@@ -126,7 +126,7 @@ public class AdminDao {
 	{
 		try(
 			Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt=con.prepareStatement("select * from admin where email='?' and password='?'");	
+				PreparedStatement pstmt=con.prepareStatement("select * from admin where email=? and password=?");	
 				PreparedStatement pstmt2=con.prepareStatement("select * from adminpayment where adminId=?");	
 			)
 		{
