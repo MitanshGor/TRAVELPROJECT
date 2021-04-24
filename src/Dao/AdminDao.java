@@ -84,6 +84,29 @@ public class AdminDao {
 		}
 		return 0;
 	}
+	public static int getAdminFromEmailAndPass(String email)
+	{
+		try
+		(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt =con.prepareStatement("select AdminId from admin where email=? ");
+		)
+		{
+			pstmt.setString(1,email);
+//			pstmt.setString(2,password);
+			
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				return rs.getInt("AdminId");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
 //	public static void main(String[] args) {
 //		AdminPayment a = new AdminPayment();
 //		a.setEmail("sdgh");

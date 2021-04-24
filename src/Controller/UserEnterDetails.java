@@ -4,6 +4,8 @@ import java.util.Scanner;
 import Bean.Admin;
 import Bean.AdminPayment;
 import Bean.UserPayment;
+import Dao.AdminDao;
+import Dao.UserDao;
 
 public class UserEnterDetails 
 {	
@@ -51,23 +53,31 @@ public class UserEnterDetails
 		admin.setBankName(BankName);
 		admin.setAccountName(AccountName);
 		admin.setAccountNo(AccountNumber);
-		sc.close();
+//		sc.close();
 		
 		
 		int validationCheck =Filter.UserDetailFilter.validationUser(admin);
 		if(validationCheck==0)
 		{
-			boolean b1 = Dao.UserDao.setUserTable(admin);
-			boolean b2 = Dao.UserDao.setUserPaymentTable(admin);
-			if(b1==false ||  b2==false)
+			if(UserDao.getUserFromEmailAndPass(email)==0 || UserDao.getUserFromEmailAndPass(email, password)==0)
 			{
-				System.out.println("Exception occoured !!!. Detail is not enetered into database");
-				return false;
+					boolean b1 = Dao.UserDao.setUserTable(admin);
+					boolean b2 = Dao.UserDao.setUserPaymentTable(admin);
+					if(b1==false ||  b2==false)
+					{
+						System.out.println("Exception occoured !!!. Detail is not enetered into database");
+						return false;
+					}
+					else
+					{
+		//				System.out.println("Sucessfull details entered in table sql");
+						return true;
+					}
 			}
 			else
 			{
-//				System.out.println("Sucessfull details entered in table sql");
-				return true;
+				System.out.println("The email you entered is already signed in !!");
+				return false;
 			}
 		}
 		else
@@ -136,6 +146,7 @@ public class UserEnterDetails
 
 		if(validationCheck==0)
 			{
+			
 				boolean b1 = Dao.UserDao.UpdateUserTable(user);
 				boolean b2 = Dao.UserDao.UpdateUserPaymentTable(user);
 				

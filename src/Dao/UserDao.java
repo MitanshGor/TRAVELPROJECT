@@ -108,11 +108,36 @@ public class UserDao {
 		}
 		return 0;
 	}
+
+	public static int getUserFromEmailAndPass(String email)
+	{
+		try
+		(
+				Connection con=JDBCConnection.getConnection();
+				PreparedStatement pstmt =con.prepareStatement("select UserId from user where email=?");
+				)
+		{
+			pstmt.setString(1,email);
+//			pstmt.setString(2,password);
+			
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				return rs.getInt("userId");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public static UserPayment GetUserDetails(String email,String password)
 	{
 		try(
 			Connection con=JDBCConnection.getConnection();
-				PreparedStatement pstmt=con.prepareStatement("select * from user where email='?' and password='?'");	
+				PreparedStatement pstmt=con.prepareStatement("select * from user where email=? and password=?");	
 				PreparedStatement pstmt2=con.prepareStatement("select * from userpayment where userId=?");	
 			)
 		{
@@ -448,6 +473,4 @@ public class UserDao {
 		}
 		return 0;
 	}
-
-		
 }

@@ -15,6 +15,7 @@ public class IndexClass {
 		{	System.out.println("-----------------------------------------------------------------------------------------");
 			System.out.println("1-----Admin ");
 			System.out.println("2-----User ");
+			System.out.println("3-----Exit App ");
 			int choice = sc.nextInt();
 			
 			switch(choice)
@@ -98,6 +99,9 @@ public class IndexClass {
 				break;
 			
 				case 3 : 
+					System.out.println("***************************************************************");
+					System.out.println("*******************Thanks for Using ***************************");
+					System.out.println("***************************************************************");
 						System.exit(0);
 			}
 		}	

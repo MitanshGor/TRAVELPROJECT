@@ -37,10 +37,7 @@ public class User  implements PersonDataInterface
 		UserName = userName;
 	}
 
-	
-	
-	
-	
+
 	public String getDob() {
 		return dob;
 	}

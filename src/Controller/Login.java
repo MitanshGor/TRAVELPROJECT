@@ -43,7 +43,7 @@ public class Login
 		String  email=sc.nextLine();
 		System.out.println("Enter User Password : ");
 		String  pass=sc.nextLine();
-		if(Filter.UserDetailFilter.checkString(email) && Filter.UserDetailFilter.checkStringOnlyRegex(email) && Filter.UserDetailFilter.checkString(pass) && Filter.UserDetailFilter.checkStringOnlyRegex(pass))
+		if(Filter.UserDetailFilter.checkString(email) && Filter.UserDetailFilter.checkEmailRegex(email) && Filter.UserDetailFilter.checkString(pass) && Filter.UserDetailFilter.checkStringAndNumberRegex(pass))
 		{
 			int i =Dao.UserDao.getUserFromEmailAndPass(email, pass);
 			UserPayment up=Dao.UserDao.GetUserDetails(email, pass);

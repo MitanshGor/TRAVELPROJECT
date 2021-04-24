@@ -58,23 +58,33 @@ public class AdminEnterDetail
 //		sc.close();
 		
 		int validationCheck = Filter.AdminDetailFilter.ValidationAdmin(admin);
-
+		
 //		sc.close();	
 		if(validationCheck==0)
 			{
-				boolean b1 = Dao.AdminDao.setAdminTable(admin);
-				boolean b2 = Dao.AdminDao.setAdminPaymentTable(admin);
-				
-				if(b1==false ||  b2==false)
+			
+				if(AdminDao.getAdminFromEmailAndPass(email)==0 || AdminDao.getAdminFromEmailAndPass(email, password)==0)
 				{
-					System.out.println("Exception occoured !!!. Detail is not enetered into database");
-					return false;
+					boolean b1 = Dao.AdminDao.setAdminTable(admin);
+					boolean b2 = Dao.AdminDao.setAdminPaymentTable(admin);
+					
+					if(b1==false ||  b2==false)
+					{
+						System.out.println("Exception occoured !!!. Detail is not enetered into database");
+						return false;
+					}
+					else
+					{
+//						System.out.println("Sucessfull details entered in table sql");
+						return true;
+					}	
 				}
 				else
 				{
-//					System.out.println("Sucessfull details entered in table sql");
-					return true;
-				}	
+					System.out.println("The email you entered is already signed in !!");
+					return false;
+				}
+			
 			}
 			else
 			{
