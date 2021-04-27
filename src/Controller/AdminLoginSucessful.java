@@ -22,16 +22,15 @@ public class AdminLoginSucessful
 		WhileLoop: while(true)
 		{
 		
-			System.out.println("-----------------------------------------------------------------------------------------");
-			System.out.println("1--------create Package");				/////////////////DONE
-			System.out.println("2--------Edit/Update Package");				////////////////Done
-			System.out.println("3--------Remove Package");					///////////////// DONE	
-			System.out.println("4--------View My Details");				///////////////////////DONE
-			System.out.println("5--------View My Customers");			
-			System.out.println("6--------View My Packages");			////////////////////////DONE
-			System.out.println("7--------Update My details");			//////////////////////Done
-			System.out.println("8--------Go Back");
-			System.out.println("Enter Your choice :");
+			System.out.println("\n\t\t1--------create Package");				/////////////////DONE
+			System.out.println("\t\t2--------Edit/Update Package");				////////////////Done
+			System.out.println("\t\t3--------Remove Package");					///////////////// DONE	
+			System.out.println("\t\t4--------View My Details");				///////////////////////DONE
+			System.out.println("\t\t5--------View My Customers");			
+			System.out.println("\t\t6--------View My Packages");			////////////////////////DONE
+			System.out.println("\t\t7--------Update My details");			//////////////////////Done
+			System.out.println("\t\t8--------Go Back");
+			System.out.print("\t\tEnter Your choice :");
 			int choice=sc.nextInt();
 			switch(choice)
 			{
@@ -39,7 +38,7 @@ public class AdminLoginSucessful
 					boolean b =PackageDetails.PackageDetailsData(a.getAdminId());
 					if(b==true)
 					{
-						System.out.println("Package Sucessfully enterd into database  !!");
+						System.out.println("\n\t\t\t\tPackage Sucessfully enterd into database  !!");
 					}
 				break;
 			case 2:
@@ -73,7 +72,7 @@ public class AdminLoginSucessful
 									System.out.printf("%6s%19s%29s%19s%25s%33s%20s%20s%25s%17s%23s%20s%24s%24s%20s%n",p1.getPackageId(),p1.getNoOfTicketsAvailable(),p1.getCountry(),p1.getPeriod_days(),t.getModeOfTransportation(),t.getArivalDate(),t.getDepartureDate(),t.getPrice(),h.getName(),h.getStarType(),h.getChceckinDate(),h.getChceckoutDate(),h.getPricePerNight(),h.getTotalPrice(),h.getAddress());
 									}
 								System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-								System.out.println("Enter PackageId from table which you want to edit : ");
+								System.out.print("\n\t\t\tEnter PackageId from table which you want to edit : ");
 								int EditId=sc.nextInt();
 								boolean ans = PackageDetails.PackageDetailsData(a.getAdminId(),EditId);
 								
@@ -83,7 +82,7 @@ public class AdminLoginSucessful
 				}
 				else
 				{
-					System.out.println("no package available to Edit !!!!");
+					System.out.println("\n\t\t\tno package available to Edit !!!!");
 				}
 		
 				break;
@@ -121,7 +120,7 @@ public class AdminLoginSucessful
 								}
 								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				
-								System.out.println("Enter package id from Above list which you want to delete : ");
+								System.out.print("\t\t\tEnter package id from Above list which you want to delete : ");
 								int PackageID=sc.nextInt();
 								int flag=0;
 								for(int i : ar)
@@ -139,14 +138,14 @@ public class AdminLoginSucessful
 								}
 								else
 								{
-									System.out.println("Package ID you entered is not in the Above List .... please enter from above list only");
+									System.out.println("\n\t\t\tPackage ID you entered is not in the Above List .... please enter from above list only");
 								}
 								
 				
 				}
 				else
 				{
-					System.out.println("No packages available to delete !!");
+					System.out.println("\n\t\t\tNo packages available to delete !!");
 				}
 				
 						
@@ -178,33 +177,39 @@ public class AdminLoginSucessful
 				break;
 			case 5:
 				ArrayList<Package> packages=PackageDao.getAllPackageOfAdminId(a.getAdminId());
-				if(packages!=null)
+//				System.out.println("\n"+packages.size()+"  --> "+packages==null);
+				if( packages!=null)
 				{
-					System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-//																																											---------------------------------------
-					System.out.printf("%-12sPacakgeId","");
-	
-	//				--
-					System.out.printf("%12sName","");
-					System.out.printf("%-12sDOB","");
-					System.out.printf("%-12sEmail","");
-//					--
-					System.out.printf("%12sPhone","");
-					System.out.printf("%-12sGender","");
-					System.out.printf("%-12sAddress","");
-					
-					System.out.printf("%-12sAccountName","");
-					System.out.printf("%-12sBankName","");
-					System.out.printf("%-12sNoOfTicket","");
-					System.out.printf("%-12stotalPrice","");
-
-					System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-											
+					int i=0;
 					for(Package p : packages)
 					{
+						
 						ArrayList<UserPackage> userpackages = UserDao.getAllUserPackageDetailbyPackageId(p.getPackageId());
 						if(userpackages!=null)
 						{
+								if(i==0)
+								{
+								System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+									//						---------------------------------------
+									System.out.printf("%-12sPacakgeId","");
+									
+									//				--
+									System.out.printf("%12sName","");
+									System.out.printf("%-12sDOB","");
+									System.out.printf("%-12sEmail","");
+									//--
+									System.out.printf("%12sPhone","");
+									System.out.printf("%-12sGender","");
+									System.out.printf("%-12sAddress","");
+									
+									System.out.printf("%-12sAccountName","");
+									System.out.printf("%-12sBankName","");
+									System.out.printf("%-12sNoOfTicket","");
+									System.out.printf("%-12stotalPrice","");
+									
+									System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+									i++;
+								}
 							for(UserPackage up : userpackages)
 							{
 								User u = UserDao.GetUserDetails(up.getUserId());
@@ -212,9 +217,17 @@ public class AdminLoginSucessful
 								System.out.printf("%17s%17s%20s%20s%17s%10s%23s%22s%19s%21s%24s%n",p.getPackageId(),u.getUserName(),u.getDob(),u.getEmail(),u.getPhone(),u.getGender(),u.getAddress(),upay.getAccountName(),upay.getBankName(),up.getNoofticket(),up.getTotalprice());
 							}
 						}
+						else
+						{
+							System.out.println("\n\t\t\tNo customers Found !!");
+						}
+							
 					}
-					System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 											
+				}
+				else
+				{
+					System.out.println("\n\t\t\tYou dont have any packaage , NO users !!");
 				}
 				break;
 			case 6:
@@ -251,7 +264,7 @@ public class AdminLoginSucessful
 					}
 					else
 					{
-						System.out.println("You dont have any packages available please create it   !!!");
+						System.out.println("\n\t\t\tYou dont have any packages available please create it   !!!");
 					}
 				break;	
 			case 7:
@@ -260,7 +273,7 @@ public class AdminLoginSucessful
 				break;
 			case 8:
 				break WhileLoop;
-			default :	System.out.println("Wrong choice entered");
+			default :	System.out.println("\n\t\t\tWrong choice entered");
 			}
 		}
 	}

@@ -134,7 +134,7 @@ public class HotelDao {
 		ResultSet rs=pstmt.executeQuery();
 		while(rs.next())
 		{
-			SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-MM-dd");
 			
 			
 			String cidate = givenDate.format(rs.getDate("checkin"));

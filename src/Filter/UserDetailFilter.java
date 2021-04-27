@@ -11,56 +11,56 @@ public class UserDetailFilter {
 		int empty=0;
 		if(UserDetailFilter.checkString(a.getPassword())==false  || UserDetailFilter.checkStringAndNumberRegex(a.getPassword())==false)
 		{
-			System.out.println("Invalid  Password = "+a.getPassword());
+			System.out.println("\t\t\t\tInvalid  Password = "+a.getPassword());
 					empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getUserName())==false || UserDetailFilter.checkStringOnlyRegex(a.getUserName())==false)
 		{
-			System.out.println("Invalid  Username = "+a.getUserName());
+			System.out.println("\t\t\t\tInvalid  Username = "+a.getUserName());
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getEmail())==false || UserDetailFilter.checkEmailRegex(a.getEmail())==false)
-		{	System.out.println("Invalid  Email = "+a.getEmail());
+		{	System.out.println("\t\t\t\tInvalid  Email = "+a.getEmail());
 		
 			empty ++;
 		}	
 		if(UserDetailFilter.checkString(a.getDob())==false || UserDetailFilter.checkDate(a.getDob())==false)
-		{	System.out.println("Invalid  DOB = " + a.getDob());
+		{	System.out.println("\t\t\t\tInvalid  DOB = " + a.getDob());
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getPhone())==false || UserDetailFilter.checkMobileRegex(a.getPhone())==false)
-		{	System.out.println("Invalid  Phone = " + a.getPhone());
+		{	System.out.println("\t\t\t\tInvalid  Phone = " + a.getPhone());
 		
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getGender())==false || UserDetailFilter.checkGenderRegex(a.getGender())==false)
-		{	System.out.println("Invalid  Gender = "+a.getGender());
+		{	System.out.println("\t\t\t\tInvalid  Gender = "+a.getGender());
 		
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getAddress())==false || UserDetailFilter.checkStringAndNumberRegex(a.getAddress().replaceAll("/", "\\"))==false)
 		{
-		System.out.println("Invalid Address = "+a.getAddress());
+		System.out.println("\t\t\t\tInvalid Address = "+a.getAddress());
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getBankName())==false || UserDetailFilter.checkStringOnlyRegex(a.getBankName())==false)
-		{	System.out.println("Invalid  Bank name = "+a.getBankName());
+		{	System.out.println("\t\t\t\tInvalid  Bank name = "+a.getBankName());
 		
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getAccountNo())==false  || UserDetailFilter.checkStringAndNumberRegex(a.getAccountNo())==false)
 		{
-			System.out.println("Invalid  AccountNo = "+a.getAccountNo());
+			System.out.println("\t\t\t\tInvalid  AccountNo = "+a.getAccountNo());
 			empty ++;
 		}
 		if(UserDetailFilter.checkString(a.getAccountName())==false|| UserDetailFilter.checkStringOnlyRegex(a.getAccountName())==false )
-		{	System.out.println("Invalid  Account nmae = "+a.getAccountName());
+		{	System.out.println("\t\t\t\tInvalid  Account nmae = "+a.getAccountName());
 		
 			empty ++;
 		}
 //		if(a.getBooktickets()<1)
 //		{
-//			System.out.println("Invalid Book Tickets = "+a.getBooktickets());
+//			System.out.println("\t\t\t\tInvalid Book Tickets = "+a.getBooktickets());
 //			empty ++;
 //		}
 		return empty;

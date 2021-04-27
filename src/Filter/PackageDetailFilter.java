@@ -13,67 +13,67 @@ public class PackageDetailFilter
 			
 			if(PackageDetailFilter.checkString(t.getCountry())==false || PackageDetailFilter.checkStringOnlyRegex(t.getCountry())==false)
 			{
-				System.out.println("Invalid Country : "+t.getCountry());
+				System.out.println("\t\t\t\tInvalid Country : "+t.getCountry());
 				empty++;
 			}
 			if(t.getPeriod_days()==0 )
 			{
-				System.out.println("Invalid no of periods : "+t.getPeriod_days());
+				System.out.println("\t\t\t\tInvalid no of periods : "+t.getPeriod_days());
 				empty++;
 			}
 			if(t.getNoOfTicketsAvailable()==0 )
 			{
-				System.out.println("Invalid no of tickets Available : "+t.getNoOfTicketsAvailable());
+				System.out.println("\t\t\t\tInvalid no of tickets Available : "+t.getNoOfTicketsAvailable());
 				empty++;
 			}
 			if(t.getModeOfTransportation()==0 || t.getModeOfTransportation()>3)
 			{
-				System.out.println("Invalid no of mode of transportaions : "+t.getModeOfTransportation());
+				System.out.println("\t\t\t\tInvalid no of mode of transportaions : "+t.getModeOfTransportation());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(t.getArivalDate())==false || PackageDetailFilter.checkDate(t.getArivalDate())==false)
 			{
-				System.out.println("Invalid Arrival Date : "+t.getArivalDate());
+				System.out.println("\t\t\t\tInvalid Arrival Date : "+t.getArivalDate());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(t.getDepartureDate())==false || PackageDetailFilter.checkDate(t.getDepartureDate())==false)
 			{
-				System.out.println("Invalid Departure Date : "+t.getDepartureDate());
+				System.out.println("\t\t\t\tInvalid Departure Date : "+t.getDepartureDate());
 				empty++;
 			}
 			if(t.getPrice()==0)
 			{
-				System.out.println("Invalid Price : "+t.getPrice());
+				System.out.println("\t\t\t\tInvalid Price : "+t.getPrice());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(h.getName())==false || PackageDetailFilter.checkStringOnlyRegex(h.getName())==false)
 			{
-				System.out.println("Invalid Hotel Name : "+h.getName());
+				System.out.println("\t\t\t\tInvalid Hotel Name : "+h.getName());
 				empty++;
 			}
 			if(h.getStarType()==0 || h.getStarType()>5)
 			{
-				System.out.println("Invalid no of Hotel stars : "+h.getStarType());
+				System.out.println("\t\t\t\tInvalid no of Hotel stars : "+h.getStarType());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(h.getChceckinDate())==false || PackageDetailFilter.checkDate(h.getChceckinDate())==false)
 			{
-				System.out.println("Invalid check in date : "+h.getChceckinDate());
+				System.out.println("\t\t\t\tInvalid check in date : "+h.getChceckinDate());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(h.getChceckoutDate())==false || PackageDetailFilter.checkDate(h.getChceckoutDate())==false)
 			{
-				System.out.println("Invalid check out date : "+h.getChceckoutDate());
+				System.out.println("\t\t\t\tInvalid check out date : "+h.getChceckoutDate());
 				empty++;
 			}
 			if(PackageDetailFilter.checkString(h.getAddress())==false || PackageDetailFilter.checkStringAndNumberRegex(h.getAddress())==false)
 			{
-				System.out.println("Invalid address : "+h.getAddress());
+				System.out.println("\t\t\t\tInvalid address : "+h.getAddress());
 				empty++;
 			}
 			if(h.getPricePerNight()==0)
 			{
-				System.out.println("Invalid Price per night : "+h.getPricePerNight());
+				System.out.println("\t\t\t\tInvalid Price per night : "+h.getPricePerNight());
 				empty++;
 			}
 			return empty;

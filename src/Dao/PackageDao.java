@@ -60,9 +60,13 @@ public static ArrayList<Package> getAllPackageOfAdminId(int adminId) {
 			ResultSet rs=pstmt.executeQuery();
 			
 			ArrayList<Package>  alPack =new ArrayList<Package>();
-			Package p ;
+			Package p =null;
+//			System.out.println(",ashfkashbgkasfgbkaushgalsfglsfgbasfgh");
+			int flag=0;
 			while(rs.next())
 			{
+				flag=1;
+//				System.out.println("safgasfgafsgsfdsdghaksfjghkasghkasghkasyg");
 				 p = new Package();
 
 			
@@ -73,6 +77,10 @@ public static ArrayList<Package> getAllPackageOfAdminId(int adminId) {
 				
 				alPack.add(p);
 				
+			}
+			if(flag==0)
+			{
+				alPack = null;
 			}
 			return alPack;
 		}
@@ -244,9 +252,9 @@ public static ArrayList<Package> getAllPackageOfTicketAvailable() {
 				{
 					pstmt.setInt(1,packageID);
 					int i = pstmt.executeUpdate();
-					if(i==0)
+					if(i==1)
 					{
-						System.out.println("Half of the data is only deleted --> Please try again !!!!");	
+						System.out.println("\n\t\t\t\tPacakge deleted Sucessfully !!");	
 					}
 				}
 				catch(Exception e)

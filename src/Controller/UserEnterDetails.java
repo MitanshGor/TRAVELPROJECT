@@ -15,26 +15,26 @@ public class UserEnterDetails
 		Scanner sc=new Scanner(System.in);
 
 		
-		System.out.println("********************USER SIGN  UP***************************");
-		System.out.println("Enter Name :");
+		System.out.print("\t\n********************USER SIGN  UP***************************");
+		System.out.print("\n\n\tEnter Name :");
 		name=sc.nextLine();
-		System.out.println("Enter Email :");
+		System.out.print("\tEnter Email :");
 		String email = sc.nextLine();
-		System.out.println("Enter password [should only have characters from : (a-zA-Z0-9!@#$%^&*()_-) ] :");
+		System.out.print("\tEnter password [should only have characters from : (a-zA-Z0-9!@#$%^&*()_-) ] :");
 		String password = sc.nextLine();
-		System.out.println("Enter DOB (YYYY-MM-DD):");
+		System.out.print("\tEnter DOB (YYYY-MM-DD):");
 		String DOB = sc.nextLine();
-		System.out.println("Enter Phone :");
+		System.out.print("\tEnter Phone :");
 		String phone = sc.nextLine();
-		System.out.println("Enter Address :");
+		System.out.print("\tEnter Address :");
 		String address = sc.nextLine();
-		System.out.println("Enter Gender  (M/F):");
+		System.out.print("\tEnter Gender  (M/F):");
 		String Gender = sc.nextLine();
-		System.out.println("Enter Bank Name :");
+		System.out.print("\tEnter Bank Name :");
 		String BankName = sc.nextLine();
-		System.out.println("Enter Account Number :");
+		System.out.print("\tEnter Account Number :");
 		String AccountNumber = sc.nextLine();
-		System.out.println("Enter Account Name :");
+		System.out.print("\tEnter Account Name :");
 		String AccountName = sc.nextLine();
 		
 			
@@ -65,24 +65,24 @@ public class UserEnterDetails
 					boolean b2 = Dao.UserDao.setUserPaymentTable(admin);
 					if(b1==false ||  b2==false)
 					{
-						System.out.println("Exception occoured !!!. Detail is not enetered into database");
+						System.out.println("\n\t\tException occoured !!!. Detail is not enetered into database");
 						return false;
 					}
 					else
 					{
-		//				System.out.println("Sucessfull details entered in table sql");
+		//				System.out.print("Sucessfull details entered in table sql");
 						return true;
 					}
 			}
 			else
 			{
-				System.out.println("The email you entered is already signed in !!");
+				System.out.println("\n\t\tThe email you entered is already signed in !!");
 				return false;
 			}
 		}
 		else
 		{
-			System.out.println(validationCheck+"/10 number of data were INVALID !!!....Please fill valid data");
+			System.out.println("\n\t\t"+validationCheck+"/10 number of data were INVALID !!!....Please fill valid data");
 			return false;	
 		}
 	}
@@ -101,26 +101,26 @@ public class UserEnterDetails
 		Scanner sc=new Scanner(System.in);
 
 		UserPayment a = Dao.UserDao.GetUserDetails(userId);
-		System.out.println("********************USER UPDATE CHANGES***************************");
-		System.out.println("Enter Name ("+a.getUserName()+")");
+		System.out.print("\n\t********************USER UPDATE CHANGES***************************");
+		System.out.print("\n\n\t\t\tEnter Name ("+a.getUserName()+") :");
 		String name=sc.nextLine();
-//		System.out.println("Enter Email :");
+//		System.out.print("Enter Email :");
 //		String email = sc.nextLine();
-		System.out.println("Enter password ("+a.getPassword()+")  [should only have characters from : (a-zA-Z0-9!@#$%^&*()_-) ] :");
+		System.out.print("\t\t\tEnter password ("+a.getPassword()+")  [should only have characters from : (a-zA-Z0-9!@#$%^&*()_-) ] :");
 		String password = sc.nextLine();
-		System.out.println("Enter DOB ("+a.getDob()+") (yyyy-mm-dd):");
+		System.out.print("\t\t\tEnter DOB ("+a.getDob()+") (yyyy-mm-dd):");
 		String DOB = sc.nextLine();
-//		System.out.println("Enter Phone :");
+//		System.out.print("Enter Phone :");
 //		String phone = sc.nextLine();
-		System.out.println("Enter Address ("+a.getAddress()+") :");
+		System.out.print("\t\t\tEnter Address ("+a.getAddress()+") :");
 		String address = sc.nextLine();
-		System.out.println("Enter Gender ("+a.getGender()+") (M/F):");
+		System.out.print("\t\t\tEnter Gender ("+a.getGender()+") (M/F):");
 		String Gender = sc.nextLine();
-		System.out.println("Enter Bank Name ("+a.getBankName()+"):");
+		System.out.print("\t\t\tEnter Bank Name ("+a.getBankName()+"):");
 		String BankName = sc.nextLine();
-		System.out.println("Enter Account Name ("+a.getAccountName()+") :");
+		System.out.print("\t\t\tEnter Account Name ("+a.getAccountName()+") :");
 		String AccountName = sc.nextLine();
-		System.out.println("Enter Account Number ("+a.getAccountNo()+") :");
+		System.out.print("\t\t\tEnter Account Number ("+a.getAccountNo()+") :");
 		String AccountNumber = sc.nextLine();
 		
 		
@@ -140,7 +140,7 @@ public class UserEnterDetails
 		user.setBankName(BankName);
 		user.setAccountName(AccountName);
 		user.setAccountNo(AccountNumber);
-//		System.out.println("-------------------------?>" + user.getUserId()+"   " + user.getUserName());
+//		System.out.print("-------------------------?>" + user.getUserId()+"   " + user.getUserName());
 		int validationCheck = Filter.UserDetailFilter.validationUser(user);
 
 
@@ -152,12 +152,12 @@ public class UserEnterDetails
 				
 				if(b1==false ||  b2==false)
 				{
-					System.out.println("Exception occoured !!!. Detail is not updated into database");
+					System.out.println("\n\t\t\t\tException occoured !!!. Detail is not updated into database");
 //					return false;
 				}
 				else
 				{
-					System.out.println("Sucessfull details updated ");
+					System.out.println("\n\t\t\t\tSucessfull details updated ");
 //					
 					
 //					return true;
@@ -165,7 +165,7 @@ public class UserEnterDetails
 			}
 			else
 			{
-				System.out.println(validationCheck+"/10 number of data were INVALID !!!....Please fill valid data");
+				System.out.println("\n\t\t\t\t"+validationCheck+"/10 number of data were INVALID !!!....Please fill valid data");
 //				return false;
 			}
 

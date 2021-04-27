@@ -15,32 +15,32 @@ public class AdminDetailFilter {
 		if(AdminDetailFilter.checkString(a.getAddress())==false || AdminDetailFilter.checkStringAndNumberRegex(a.getAddress().replaceAll("/", "\\")
 				)==false)
 		{
-		System.out.println("Invalid Address = "+a.getAddress());
+		System.out.println("\t\t\t\tInvalid Address = "+a.getAddress());
 			empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getPassword())==false  || AdminDetailFilter.checkStringAndNumberRegex(a.getPassword())==false)
 		{
-			System.out.println("Invalid  Password = "+a.getPassword());
+			System.out.println("\t\t\t\tInvalid  Password = "+a.getPassword());
 					empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getAdminName())==false  || AdminDetailFilter.checkStringOnlyRegex(a.getAdminName())==false)
 		{
-			System.out.println("Invalid  AdmiNname = "+a.getAdminName());
+			System.out.println("\t\t\t\tInvalid  AdmiNname = "+a.getAdminName());
 			empty ++;
 		}
 		
 		if(AdminDetailFilter.checkString(a.getEmail())==false || AdminDetailFilter.checkEmailRegex(a.getEmail())==false)
-		{	System.out.println("Invalid  Email = "+a.getEmail());
+		{	System.out.println("\t\t\t\tInvalid  Email = "+a.getEmail());
 		
 			empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getBankName())==false || AdminDetailFilter.checkStringOnlyRegex(a.getBankName())==false)
-		{	System.out.println("Invalid  Bank name = "+a.getBankName());
+		{	System.out.println("\t\t\t\tInvalid  Bank name = "+a.getBankName());
 		
 			empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getAccountName())==false|| AdminDetailFilter.checkStringOnlyRegex(a.getAccountName())==false )
-		{	System.out.println("Invalid  Account nmae = "+a.getAccountName());
+		{	System.out.println("\t\t\t\tInvalid  Account nmae = "+a.getAccountName());
 		
 			empty ++;
 		}
@@ -48,22 +48,22 @@ public class AdminDetailFilter {
 										//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 										//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if(AdminDetailFilter.checkString(a.getGender())==false || AdminDetailFilter.checkGenderRegex(a.getGender())==false)
-		{	System.out.println("Invalid  Gender = "+a.getGender());
+		{	System.out.println("\t\t\t\tInvalid  Gender = "+a.getGender());
 		
 			empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getPhone())==false || AdminDetailFilter.checkMobileRegex(a.getPhone())==false)
-		{	System.out.println("Invalid  Phone = " + a.getPhone());
+		{	System.out.println("\t\t\t\tInvalid  Phone = " + a.getPhone());
 		
 			empty ++;
 		}
 		if(AdminDetailFilter.checkString(a.getDOB())==false || AdminDetailFilter.checkDate(a.getDOB())==false)
-		{	System.out.println("Invalid  DOB = " + a.getDOB());
+		{	System.out.println("\t\t\t\tInvalid  DOB = " + a.getDOB());
 			empty ++;
 		}
 		
 		if(AdminDetailFilter.checkStringAndNumberRegex(a.getAccountNo())==false && AdminDetailFilter.checkString(a.getAccountNo())==false)
-		{	System.out.println("Invalid  Account number = " +a.getAccountNo());
+		{	System.out.println("\t\t\t\tInvalid  Account number = " +a.getAccountNo());
 		
 			empty ++;
 		}

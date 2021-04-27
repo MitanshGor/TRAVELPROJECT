@@ -15,12 +15,12 @@ public class PackageDetails
 		
 
 		
-		System.out.println("********************Package Details***************************\n");
-		System.out.println("Enter Country  : ");          //
+		System.out.println("\n\t********************Package Details***************************\n");
+		System.out.print("\t\t\tEnter Country  : ");          //
 		String Country=sc.nextLine();
-		System.out.println("Enter No of Days  : ");          //
+		System.out.print("\t\t\tEnter No of Days  : ");          //
 		int noOfDays=sc.nextInt();
-		System.out.println("No of Tickets Available : ");          //
+		System.out.print("\t\t\tNo of Tickets Available : ");          //
 		int ticketsAvailable=sc.nextInt();
 
 		Transportation t=new Transportation();
@@ -31,16 +31,16 @@ public class PackageDetails
 		t.setCountry(Country);
 		//t.setPackageId(noOfPeople);
 		t.setPeriod_days(noOfDays);
-		System.out.println("********************USER Transportation***************************\n");
+		System.out.print("\n\t\t\t********************USER Transportation***************************\n");
 		
-		System.out.println("Enter Mode Of Transportation (1---Bus | 2--Train | 3--Flight ) : ");
+		System.out.print("\n\t\t\tEnter Mode Of Transportation (1---Bus | 2--Train | 3--Flight ) : ");
 		int modeOfTrtportation=sc.nextInt();
 		sc.nextLine();
-		System.out.println("Enter Arrival_Date (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter Arrival_Date (YYYY-MM-DD): ");
 		String ArrivalDate=sc.nextLine();
-		System.out.println("Enter Departure_Date (YYYY-MM-DD) : ");
+		System.out.print("\t\t\tEnter Departure_Date (YYYY-MM-DD) : ");
 		String DepartureDate=sc.nextLine();
-		System.out.println("Enter Price : ");
+		System.out.print("\t\t\tEnter Price : ");
 		float price=sc.nextFloat();
 		
 		
@@ -49,19 +49,19 @@ public class PackageDetails
 		t.setModeOfTransportation(modeOfTrtportation);
 		t.setPrice(price);
 		
-		System.out.println("********************Enter Hotel***************************\n");
-		System.out.println("Enter Star Type ( /5): ");
+		System.out.println("\n\t\t\t********************Enter Hotel***************************\n");
+		System.out.print("\n\t\t\tEnter Star Type ( /5): ");
 		int StarType=sc.nextInt();
 		sc.nextLine();
-		System.out.println("Enter Hotel Name : ");
+		System.out.print("\t\t\tEnter Hotel Name : ");
 		String Hotelname=sc.nextLine();
-		System.out.println("Enter CheckIn (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter CheckIn (YYYY-MM-DD): ");
 		String CheckIn=sc.nextLine();
-		System.out.println("Enter CheckOut (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter CheckOut (YYYY-MM-DD): ");
 		String CheckOut=sc.nextLine();
-		System.out.println("Enter Address of Hotel : ");
+		System.out.print("\t\t\tEnter Address of Hotel : ");
 		String Address=sc.nextLine();
-		System.out.println("Enter Price per Night : ");
+		System.out.print("\t\t\tEnter Price per Night : ");
 		float PricePerNight=sc.nextFloat();
 		
 		Hotel h=new Hotel();
@@ -90,7 +90,7 @@ public class PackageDetails
 
 		if(packageId==0)
 		{
-			System.out.println("Exception occoured !!!. Detail is not enetered into database");
+			System.out.println("\n\t\t\t\tException occoured !!!. Detail is not enetered into database");
 			return false;
 		}
 		else
@@ -100,7 +100,7 @@ public class PackageDetails
 	}
 	else
 	{
-		System.out.println(n+"/15 number of data were INVALID !!!....Please fill valid data");
+		System.out.println("\n\t\t\t\t"+n+"/15 number of data were INVALID !!!....Please fill valid data");
 		return false;	
 	
 	}
@@ -152,44 +152,44 @@ public class PackageDetails
 		Hotel hc=Dao.HotelDao.getHotelFromPackageID(pId);
 		
 		
-		System.out.println("********************Package Details***************************\n");
-		System.out.println("Enter Country ("+pc.getCountry()+")  : ");          //
+		System.out.println("\n\t********************Package Details***************************\n");
+		System.out.print("\n\t\t\tEnter Country ("+pc.getCountry()+")  : ");          //
 		String Country=sc.nextLine();
-		System.out.println("Enter No of Days ("+pc.getPeriod_days()+") : ");          //
+		System.out.print("\t\t\tEnter No of Days ("+pc.getPeriod_days()+") : ");          //
 		int noOfDays=sc.nextInt();
-		System.out.println("No of Tickets Available ("+pc.getNoOfTicketsAvailable()+") : ");          //
+		System.out.print("\t\t\tNo of Tickets Available ("+pc.getNoOfTicketsAvailable()+") : ");          //
 		int ticketsAvailable=sc.nextInt();
 
 		
 		// country noOfPeople noOfDays  ticketsAvailable
-		System.out.println("********************USER Transportation***************************\n");
+		System.out.println("\n\t\t\t********************USER Transportation***************************\n");
 		
-		System.out.println("Enter Mode Of Transportation ("+tc.getModeOfTransportation()+") (1---Bus | 2--Train | 3--Flight ) : ");
+		System.out.print("\n\t\t\tEnter Mode Of Transportation ("+tc.getModeOfTransportation()+") (1---Bus | 2--Train | 3--Flight ) : ");
 		int modeOfTrtportation=sc.nextInt();
 		sc.nextLine();
-		System.out.println("Enter Arrival_Date ("+tc.getArivalDate()+") (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter Arrival_Date ("+tc.getArivalDate()+") (YYYY-MM-DD): ");
 		String ArrivalDate=sc.nextLine();
-		System.out.println("Enter Departure_Date ("+tc.getDepartureDate()+") (YYYY-MM-DD) : ");
+		System.out.print("\t\t\tEnter Departure_Date ("+tc.getDepartureDate()+") (YYYY-MM-DD) : ");
 		String DepartureDate=sc.nextLine();
-		System.out.println("Enter Price ("+tc.getPrice()+"): ");
+		System.out.print("\t\t\tEnter Price ("+tc.getPrice()+"): ");
 		float price=sc.nextFloat();
 		
 		
 	
 		
-		System.out.println("********************Enter Hotel***************************\n");
-		System.out.println("Enter Star Type ("+hc.getStarType()+") ( /5): ");
+		System.out.println("\n\t\t\t********************Enter Hotel***************************\n");
+		System.out.print("\n\t\t\tEnter Star Type ("+hc.getStarType()+") ( /5): ");
 		int StarType=sc.nextInt();
 		sc.nextLine();
-		System.out.println("Enter Hotel Name ("+hc.getName()+"): ");
+		System.out.print("\t\t\tEnter Hotel Name ("+hc.getName()+"): ");
 		String Hotelname=sc.nextLine();
-		System.out.println("Enter CheckIn ("+hc.getChceckinDate()+") (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter CheckIn ("+hc.getChceckinDate()+") (YYYY-MM-DD): ");
 		String CheckIn=sc.nextLine();
-		System.out.println("Enter CheckOut ("+hc.getChceckoutDate()+") (YYYY-MM-DD): ");
+		System.out.print("\t\t\tEnter CheckOut ("+hc.getChceckoutDate()+") (YYYY-MM-DD): ");
 		String CheckOut=sc.nextLine();
-		System.out.println("Enter Address of Hotel ("+hc.getAddress()+"): ");
+		System.out.print("\t\t\tEnter Address of Hotel ("+hc.getAddress()+"): ");
 		String Address=sc.nextLine();
-		System.out.println("Enter Price per Night ("+hc.getPricePerNight()+"): ");
+		System.out.print("\t\t\tEnter Price per Night ("+hc.getPricePerNight()+"): ");
 		float PricePerNight=sc.nextFloat();
 		
 		
@@ -233,24 +233,20 @@ public class PackageDetails
 		boolean b3 = Dao.PackageDao.UpdatePackageDetailsSql(t,packageId);
 		if(b1 && b2 && b3)
 		{
-			System.out.println("Data updated Sucessfully !!");
+			System.out.println("\n\t\t\t\tData updated Sucessfully !!");
 			return true;
-		}
-		else if(!b1 && !b2 && !b3)
-		{
-			
-			System.out.println("None of the data is changed so please update data again !!");
-			return false;
 		}
 		else
 		{
-			System.out.println("Only some of the data is changed so please update data again !!");
+			
+			System.out.println("\n\t\t\t\tData has not changed , please do it again !!");
 			return false;
 		}
+
 	}
 	else
 	{
-		System.out.println(n+"/15 number of data were INVALID !!!....Please fill valid data");
+		System.out.println("\n\t\t\t\t"+n+"/15 number of data were INVALID !!!....Please fill valid data");
 		return false;	
 	
 	}
