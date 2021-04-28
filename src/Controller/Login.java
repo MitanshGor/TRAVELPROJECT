@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Bean.AdminPayment;
@@ -11,55 +12,75 @@ public class Login
 	public static AdminPayment AdminLogindetails()
 	{
 		Scanner sc=new Scanner(System.in);
-		System.out.print("\t\tEnter Admin email : ");
-		String  email=sc.nextLine();
-		System.out.print("\t\tEnter Admin Password : ");
-		String  pass=sc.nextLine();
-		if(Filter.AdminDetailFilter.checkString(email) && Filter.AdminDetailFilter.checkEmailRegex(email) && Filter.AdminDetailFilter.checkString(pass) && Filter.AdminDetailFilter.checkStringAndNumberRegex(pass))
+		try
 		{
-			int i =Dao.AdminDao.getAdminFromEmailAndPass(email, pass);
-			AdminPayment a= Dao.AdminDao.GetAdminDetails(email, pass);
-			
-			if(i==0 || a==null)
+			System.out.print("\t\tEnter Admin email : ");
+			String  email=sc.nextLine();
+			System.out.print("\t\tEnter Admin Password : ");
+			String  pass=sc.nextLine();
+			if(Filter.AdminDetailFilter.checkString(email) && Filter.AdminDetailFilter.checkEmailRegex(email) && Filter.AdminDetailFilter.checkString(pass) && Filter.AdminDetailFilter.checkStringAndNumberRegex(pass))
 			{
-				System.out.println("\n\t\t\tYou are not signed up !!!   OR   you enter wrong details !!!!");
-				return null;
+				int i =Dao.AdminDao.getAdminFromEmailAndPass(email, pass);
+				AdminPayment a= Dao.AdminDao.GetAdminDetails(email, pass);
+				
+				if(i==0 || a==null)
+				{
+					System.out.println("\n\t\t\tYou are not signed up !!!   OR   you enter wrong details !!!!");
+					return null;
+				}
+				else
+				{
+					return a;
+				}
 			}
 			else
 			{
-				return a;
+				System.out.println("\n\t\t\tEntered Details are Invalid !!!");
+				return null;
 			}
 		}
-		else
+		catch (InputMismatchException e) 
 		{
-			System.out.println("\n\t\t\tEntered Details are Invalid !!!");
-			return null;
+			System.out.println("***************************************************");
+			System.out.println("\t\tInvalid Input");
+			System.out.println("***************************************************");
+			return null;	
 		}
 	}
 	public static UserPayment UserLogindetails()
 	{
 		Scanner sc=new Scanner(System.in);
-		System.out.print("\t\tEnter User email : ");
-		String  email=sc.nextLine();
-		System.out.print("\t\tEnter User Password : ");
-		String  pass=sc.nextLine();
-		if(Filter.UserDetailFilter.checkString(email) && Filter.UserDetailFilter.checkEmailRegex(email) && Filter.UserDetailFilter.checkString(pass) && Filter.UserDetailFilter.checkStringAndNumberRegex(pass))
+		try
 		{
-			int i =Dao.UserDao.getUserFromEmailAndPass(email, pass);
-			UserPayment up=Dao.UserDao.GetUserDetails(email, pass);
-			if(i==0 || up==null)
+			System.out.print("\t\tEnter User email : ");
+			String  email=sc.nextLine();
+			System.out.print("\t\tEnter User Password : ");
+			String  pass=sc.nextLine();
+			if(Filter.UserDetailFilter.checkString(email) && Filter.UserDetailFilter.checkEmailRegex(email) && Filter.UserDetailFilter.checkString(pass) && Filter.UserDetailFilter.checkStringAndNumberRegex(pass))
 			{
-				System.out.println("\n\t\t\tYou are not signed up !!!   OR   you enter wrong details !!!!");
-				return null;
+				int i =Dao.UserDao.getUserFromEmailAndPass(email, pass);
+				UserPayment up=Dao.UserDao.GetUserDetails(email, pass);
+				if(i==0 || up==null)
+				{
+					System.out.println("\n\t\t\tYou are not signed up !!!   OR   you enter wrong details !!!!");
+					return null;
+				}
+				else
+				{
+					return up;
+				}
 			}
 			else
 			{
-				return up;
+				System.out.println("\n\t\t\tEntered Details are Invalid !!!");
+				return null;
 			}
 		}
-		else
+		catch(InputMismatchException e)
 		{
-			System.out.println("\n\t\t\tEntered Details are Invalid !!!");
+			System.out.println("***************************************************");
+			System.out.println("\t\tInvalid Input");
+			System.out.println("***************************************************");
 			return null;
 		}
 	}

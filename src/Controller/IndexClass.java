@@ -9,7 +9,7 @@ public class IndexClass {
 
 	public static void main(String[] args) 
 	{
-		int  adminChoice;
+//		int  adminChoice;
 		Scanner sc=new Scanner(System.in);
 		
 		System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
@@ -20,9 +20,8 @@ public class IndexClass {
 		System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
 		System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
 		System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
-		
+			
 		while(true)
-//			System.out.println("-----------------------------------------------------------------------------------------");
 		{
 			System.out.println();
 			System.out.println();
@@ -31,7 +30,17 @@ public class IndexClass {
 			System.out.println("2-----User ");
 			System.out.println("3-----Exit App ");
 			System.out.print("Enter Your choice :");
-			int choice = sc.nextInt();
+			int choice;
+			String ch=sc.next();
+			try
+			{
+			 choice=Integer.parseInt(ch);
+			}
+			catch(NumberFormatException e)
+			{
+				CatchBlockStatement();
+				continue;
+			}
 			System.out.println();
 			switch(choice)
 			{
@@ -46,7 +55,17 @@ public class IndexClass {
 							System.out.println("\t2-----Admin Login ");
 							System.out.println("\t3-----Go back");
 							System.out.print("\tEnter Your choice :");
-							adminChoice=  sc.nextInt();
+							int adminChoice;
+							String ch1=sc.next();
+							try
+							{
+							 adminChoice=Integer.parseInt(ch1);
+							}
+							catch(NumberFormatException e)
+							{
+								CatchBlockStatement();
+								continue;
+							}
 							System.out.println();
 							switch(adminChoice)
 							{
@@ -90,6 +109,16 @@ public class IndexClass {
 						System.out.println("\t3-----Go back");
 						System.out.print("\tEnter Your choice :");
 						int userChoice= sc.nextInt();
+						String ch3=sc.next();
+						try
+						{
+						 userChoice=Integer.parseInt(ch3);
+						}
+						catch(NumberFormatException e)
+						{
+							CatchBlockStatement();
+							continue;
+						}
 						System.out.println();
 						switch(userChoice)
 						{
@@ -131,6 +160,16 @@ public class IndexClass {
 					System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
 						System.exit(0);
 			}
+			
 		}	
+		}
+		
+
+	public static void CatchBlockStatement()
+	{
+		System.out.println("\n\n***************************************************");
+		System.out.println("\t\tInvalid Input");
+		System.out.println("***************************************************");
+	
 	}
 }

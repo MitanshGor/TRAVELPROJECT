@@ -278,11 +278,12 @@ public static ArrayList<Package> getAllPackageOfTicketAvailable() {
 			) 
 		{	
 			//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
-			Package a =new Package();
+			Package a=null;
 			pstmt.setInt(1, pId);
 		ResultSet rs=pstmt.executeQuery();
 		while(rs.next())
 		{
+			a =new Package();
 			a.setNoOfTicketsAvailable(rs.getInt("ticketsAvailable"));
 			a.setCountry(rs.getString("country"));
 			a.setPeriod_days(rs.getInt("PeriodDay"));
