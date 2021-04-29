@@ -5,15 +5,12 @@ import java.util.regex.Pattern;
 
 import Bean.AdminPayment;
 
-public class AdminDetailFilter {
-
-	
+public class AdminDetailFilter 
+{	
 	public static int ValidationAdmin(AdminPayment a)
 	{
 		int empty=0;
-//		int date=0;
-		if(AdminDetailFilter.checkString(a.getAddress())==false || AdminDetailFilter.checkStringAndNumberRegex(a.getAddress().replaceAll("/", "\\")
-				)==false)
+		if(AdminDetailFilter.checkString(a.getAddress())==false || AdminDetailFilter.checkStringAndNumberRegex(a.getAddress().replaceAll("/", "\\"))==false)
 		{
 		System.out.println("\t\t\t\tInvalid Address = "+a.getAddress());
 			empty ++;
@@ -44,9 +41,6 @@ public class AdminDetailFilter {
 		
 			empty ++;
 		}
-										//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-										//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-										//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if(AdminDetailFilter.checkString(a.getGender())==false || AdminDetailFilter.checkGenderRegex(a.getGender())==false)
 		{	System.out.println("\t\t\t\tInvalid  Gender = "+a.getGender());
 		
@@ -69,10 +63,6 @@ public class AdminDetailFilter {
 		}
 		return empty;
 	}
-	
-	
-//											REGEX PART AND VALIDATION PART
-	
 	
 	public static boolean checkString(String s)
 	{
@@ -121,9 +111,10 @@ public class AdminDetailFilter {
 		return s.toUpperCase().equals("M") || s.toUpperCase().equals("F");
 		
 	}
-	public static void main(String[] args) {
-		AdminDetailFilter a=new AdminDetailFilter();
-		System.out.println(a.checkStringAndNumberRegex("34554"));
-	}
-}
 
+//	public static void main(String[] args) {
+//		AdminDetailFilter a=new AdminDetailFilter();
+//		System.out.println(a.checkStringAndNumberRegex("34554"));
+//	}
+
+}

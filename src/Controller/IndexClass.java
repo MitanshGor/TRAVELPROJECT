@@ -31,7 +31,7 @@ public class IndexClass {
 			System.out.println("3-----Exit App ");
 			System.out.print("Enter Your choice :");
 			int choice;
-			String ch=sc.next();
+			String ch=sc.next();		// A-z 0-9
 			try
 			{
 			 choice=Integer.parseInt(ch);
@@ -108,8 +108,9 @@ public class IndexClass {
 						System.out.println("\t2-----User Login ");
 						System.out.println("\t3-----Go back");
 						System.out.print("\tEnter Your choice :");
-						int userChoice= sc.nextInt();
-						String ch3=sc.next();
+						int userChoice;
+						sc.next();
+						String ch3=sc.nextLine();
 						try
 						{
 						 userChoice=Integer.parseInt(ch3);
@@ -153,7 +154,6 @@ public class IndexClass {
 						}
 					}	
 				break;
-			
 				case 3 : 
 					System.out.println("\t\t\t\t-----------------------------------------------------------------------------------------");
 					System.out.println("\t\t\t\t----------------------------Thanks for Using TRAVELPEDIA---------------------------------");
@@ -170,6 +170,5 @@ public class IndexClass {
 		System.out.println("\n\n***************************************************");
 		System.out.println("\t\tInvalid Input");
 		System.out.println("***************************************************");
-	
 	}
 }

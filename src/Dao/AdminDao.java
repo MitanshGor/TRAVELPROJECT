@@ -162,15 +162,18 @@ public class AdminDao {
 				a.setAdminId(rs.getInt("AdminId"));
 				a.setAdminName(rs.getString("AdminName"));
 				
+				
+				// convert date to string
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
 			    String strDate = formatter.format(rs.getDate("DOB"));  
 			    a.setDOB(strDate);
+			    
 			    a.setEmail(rs.getString("email"));
 			    a.setPassword(rs.getString("password"));
 			    a.setPhone(rs.getString("phone"));
 			    a.setGender(rs.getString("gender"));
 			    a.setAddress(rs.getString("address"));
-				}
+			}
 			pstmt2.setInt(1,a.getAdminId());
 				
 			ResultSet rs2=pstmt2.executeQuery();

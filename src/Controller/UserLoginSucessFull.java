@@ -26,11 +26,6 @@ public class UserLoginSucessFull
 				try
 				{
 						System.out.println("\n\t\t1-----------------Pacakge");
-															//1-----All packages
-															//1-----Country
-															//1-----Modeof transportation
-															//1-----TicketsAvailable
-								
 						System.out.println("\t\t2-----------------view my detail");
 						System.out.println("\t\t3-----------------Update my detail");
 						System.out.println("\t\t4-----------------My history packages");

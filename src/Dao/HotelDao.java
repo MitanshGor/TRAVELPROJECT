@@ -131,7 +131,8 @@ public class HotelDao {
 			//int adminId=AdminDao.getAdminFromEmailAndPass(email, password);
 			Hotel a =new Hotel();
 			pstmt.setInt(1, pId);
-		ResultSet rs=pstmt.executeQuery();
+		
+			ResultSet rs=pstmt.executeQuery();
 		while(rs.next())
 		{
 			SimpleDateFormat givenDate = new SimpleDateFormat("yyyy-MM-dd");
