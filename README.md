@@ -1,2 +1,2 @@
 # TRAVELPROJECTJAVA
-mitnash,marmik,jainam,Kunal
+mitnash,marmik,jainam
