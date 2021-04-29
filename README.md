@@ -1,2 +1,3 @@
-# TRAVELPROJECTJAVA
-mitnash,marmik,jainam
+# TRAVEL PROJECT JAVA
+---------------------------------
+Mitansh Gor, Jainam Patel , Marmik Patel
