@@ -1,0 +1,360 @@
+mysql> use travelagency;
+
+Database changed
+
+mysql> show tables;
+
+
++------------------------+
+| Tables_in_travelagency |
++------------------------+
+| admin                  |
+| adminpayment           |
+| hotel                  |
+| package                |
+| transportation         |
+| user                   |
+| userpackage            |
+| userpayment            |
++------------------------+
+
+
+
+
+
+mysql> desc admin;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| AdminId   | int          | NO   | PRI | NULL    | auto_increment |
+| AdminName | varchar(30)  | NO   |     | NULL    |                |
+| DOB       | date         | YES  |     | NULL    |                |
+| email     | varchar(30)  | NO   |     | NULL    |                |
+| password  | varchar(30)  | NO   |     | NULL    |                |
+| phone     | varchar(11)  | NO   |     | NULL    |                |
+| Gender    | varchar(14)  | NO   |     | NULL    |                |
+| Address   | varchar(100) | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+
+mysql> desc adminpayment;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| AccountNo   | varchar(30) | NO   | PRI | NULL    |       |
+| AdminId     | int         | YES  | MUL | NULL    |       |
+| Bankname    | varchar(30) | NO   |     | NULL    |       |
+| AccountName | varchar(40) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+
+mysql> desc hotel;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| HotelId       | int          | NO   | PRI | NULL    | auto_increment |
+| HotelName     | varchar(40)  | NO   |     | NULL    |                |
+| startype      | int          | NO   |     | NULL    |                |
+| checkin       | date         | NO   |     | NULL    |                |
+| checkOut      | date         | NO   |     | NULL    |                |
+| HotelAddress  | varchar(100) | NO   |     | NULL    |                |
+| pricePerNight | float(15,5)  | NO   |     | NULL    |                |
+| packageId     | int          | NO   | MUL | NULL    |                |
+| totalprice    | float(15,5)  | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+
+
+mysql> desc package;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| AdminId          | int         | YES  | MUL | NULL    |                |
+| PackageId        | int         | NO   | PRI | NULL    | auto_increment |
+| TicketsAvailable | int         | NO   |     | NULL    |                |
+| Country          | varchar(30) | NO   |     | NULL    |                |
+| PeriodDay        | int         | NO   |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+
+mysql> desc transportation;
++----------------------+-------------+------+-----+---------+----------------+
+| Field                | Type        | Null | Key | Default | Extra          |
++----------------------+-------------+------+-----+---------+----------------+
+| TransportId          | int         | NO   | PRI | NULL    | auto_increment |
+| modeOfTransportation | int         | NO   |     | NULL    |                |
+| ArrivalDate          | date        | NO   |     | NULL    |                |
+| DeparturDate         | date        | NO   |     | NULL    |                |
+| price                | float(15,5) | NO   |     | NULL    |                |
+| packageId            | int         | YES  | MUL | NULL    |                |
++----------------------+-------------+------+-----+---------+----------------+
+
+mysql> desc user;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| UserId   | int          | NO   | PRI | NULL    | auto_increment |
+| UserName | varchar(30)  | NO   |     | NULL    |                |
+| DOB      | date         | NO   |     | NULL    |                |
+| email    | varchar(30)  | NO   |     | NULL    |                |
+| password | varchar(30)  | NO   |     | NULL    |                |
+| phone    | varchar(11)  | NO   |     | NULL    |                |
+| Gender   | varchar(14)  | NO   |     | NULL    |                |
+| Address  | varchar(100) | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+
+
+mysql> desc userpayment;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| AccountNo   | varchar(30) | NO   | PRI | NULL    |       |
+| userid      | int         | YES  | MUL | NULL    |       |
+| Bankname    | varchar(30) | NO   |     | NULL    |       |
+| AccountName | varchar(40) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+
+mysql> desc userpackage;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| packageId  | int         | YES  | MUL | NULL    |       |
+| userId     | int         | YES  | MUL | NULL    |       |
+| noOfTicket | int         | YES  |     | NULL    |       |
+| TotalPrice | float(15,4) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+
+
+
+ CREATE TABLE `admin` (
+						  `AdminId` int NOT NULL AUTO_INCREMENT,
+						  `AdminName` varchar(30) NOT NULL,
+						  `DOB` date DEFAULT NULL,
+						  `email` varchar(30) NOT NULL,
+						  `password` varchar(30) NOT NULL,
+						  `phone` varchar(11) NOT NULL,
+						  `Gender` varchar(14) NOT NULL,
+						  `Address` varchar(100) NOT NULL,
+						  PRIMARY KEY (`AdminId`)
+  )
+  
+  CREATE TABLE `adminpayment` (
+					  	`AccountNo` varchar(30) NOT NULL,
+					  	`AdminId` int DEFAULT NULL,
+					  	`Bankname` varchar(30) NOT NULL,
+					  	`AccountName` varchar(40) NOT NULL,
+					 	 PRIMARY KEY (`AccountNo`),
+						  KEY `AdminId` (`AdminId`)
+)
+
+
+ CREATE TABLE `hotel` (
+  `HotelId` int NOT NULL AUTO_INCREMENT,
+  `HotelName` varchar(40) NOT NULL,
+  `startype` int NOT NULL,
+  `checkin` date NOT NULL,
+  `checkOut` date NOT NULL,
+  `HotelAddress` varchar(100) NOT NULL,
+  `pricePerNight` float(15,5) NOT NULL,
+  `packageId` int NOT NULL,
+  `totalprice` float(15,5) DEFAULT NULL,
+  PRIMARY KEY (`HotelId`),
+  KEY `packageId` (`packageId`),
+  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`packageId`) REFERENCES `package` (`PackageId`)
+)
+
+ CREATE TABLE `package` (
+  `AdminId` int DEFAULT NULL,
+  `PackageId` int NOT NULL AUTO_INCREMENT,
+  `TicketsAvailable` int NOT NULL,
+  `Country` varchar(30) NOT NULL,
+  `PeriodDay` int NOT NULL,
+  PRIMARY KEY (`PackageId`),
+  KEY `fk_adminIdPayent` (`AdminId`),
+  CONSTRAINT `fk_adminId` FOREIGN KEY (`AdminId`) REFERENCES `admin` (`AdminId`),
+  CONSTRAINT `fk_adminIdPayent` FOREIGN KEY (`AdminId`) REFERENCES `admin` (`AdminId`)
+)
+
+
+ CREATE TABLE `transportation` (
+  `TransportId` int NOT NULL AUTO_INCREMENT,
+  `modeOfTransportation` int NOT NULL,
+  `ArrivalDate` date NOT NULL,
+  `DeparturDate` date NOT NULL,
+  `price` float(15,5) NOT NULL,
+  `packageId` int DEFAULT NULL,
+  PRIMARY KEY (`TransportId`),
+  KEY `packageId` (`packageId`),
+  CONSTRAINT `transportation_ibfk_1` FOREIGN KEY (`packageId`) REFERENCES `package` (`PackageId`)
+)
+
+CREATE TABLE `user` (
+  `UserId` int NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(30) NOT NULL,
+  `DOB` date NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `phone` varchar(11) NOT NULL,
+  `Gender` varchar(14) NOT NULL,
+  `Address` varchar(100) NOT NULL,
+  PRIMARY KEY (`UserId`)
+)
+
+ CREATE TABLE `userpayment` (
+  `AccountNo` varchar(30) NOT NULL,
+  `userid` int DEFAULT NULL,
+  `Bankname` varchar(30) NOT NULL,
+  `AccountName` varchar(40) NOT NULL,
+  PRIMARY KEY (`AccountNo`),
+  KEY `UserId` (`userid`),
+  CONSTRAINT `userpayment_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`UserId`)
+)
+
+
+ CREATE TABLE `userpackage` (
+  `packageId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `noOfTicket` int DEFAULT NULL,
+  `TotalPrice` float(15,4) DEFAULT NULL,
+  KEY `fk_pacakgeID1` (`packageId`),
+  KEY `fk_userID1` (`userId`),
+  CONSTRAINT `fk_pacakgeID1` FOREIGN KEY (`packageId`) REFERENCES `package` (`PackageId`),
+  CONSTRAINT `fk_userID1` FOREIGN KEY (`userId`) REFERENCES `user` (`UserId`)
+)
+
+
+
+
+
+
+
+mysql> select * from admin;
++---------+-----------+------------+-------------------+------------+------------+--------+--------------+
+| AdminId | AdminName | DOB        | email             | password   | phone      | Gender | Address      |
++---------+-----------+------------+-------------------+------------+------------+--------+--------------+
+|      20 | Mitansh   | 2002-10-01 | mit@gmail.com     | mit2002    | 1234098765 | M      | shkhar       |
+|      21 | Jainam    | 2001-09-28 | jainam@gmail.com  | Jainam2001 | 2459205820 | M      | ApuraNiHavel |
+|      22 | Marmik    | 2001-05-03 | marmik@gmail.ccom | marmik2001 | 2910398764 | M      | sindhubhavan |
+|      23 | Rancho    | 2002-01-30 | rancho@gmail.com  | rancho     | 4910357893 | M      | dehradun     |
+|      24 | SmitPatel | 2001-09-23 | smit@gmail.com    | smit2001   | 3810345678 | M      | thaltej      |
++---------+-----------+------------+-------------------+------------+------------+--------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from adminpayment;
++-----------+---------+----------+----------------+
+| AccountNo | AdminId | Bankname | AccountName    |
++-----------+---------+----------+----------------+
+| 224252    |      22 | HDFC     | MARMIK S PATEL |
+| 23423     |      23 | ICICI    | Wunsukh wangdu |
+| 2345      |      20 | HDFC     | Mitansh Gor    |
+| 2452445   |      24 | HDFC     | SMIT PATLE     |
+| 8885252   |      21 | HSBC     | JAINAM H PATEL |
++-----------+---------+----------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from user;
++--------+----------+------------+-------------------+----------+------------+--------+------------+
+| UserId | UserName | DOB        | email             | password | phone      | Gender | Address    |
++--------+----------+------------+-------------------+----------+------------+--------+------------+
+|      5 | Mitansh  | 2002-01-09 | mitansh@gmail.com | mit2002  | 3987651234 | M      | shikhar    |
+|      6 | Raju     | 2004-10-29 | raju@gmail.com    | raju2004 | 9016387297 | M      | Shivranjni |
+|      8 | Smit     | 2002-04-09 | smit@gmail.com    | smit2001 | 1234567823 | M      | thatej     |
++--------+----------+------------+-------------------+----------+------------+--------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from userpayment;
++-----------+--------+----------+----------------+
+| AccountNo | userid | Bankname | AccountName    |
++-----------+--------+----------+----------------+
+| 24524     |      6 | BOB      | RAJU K MADHU   |
+| 25245     |      8 | ICICI    | SMIT S PATEL   |
+| 2524524   |      5 | ICICI    | MITANSH  J GOR |
++-----------+--------+----------+----------------+
+3 rows in set (0.04 sec)
+
+
+mysql> select * from userpackage;
++-----------+--------+------------+-------------+
+| packageId | userId | noOfTicket | TotalPrice  |
++-----------+--------+------------+-------------+
+|        35 |      5 |          4 | 536000.0000 |
+|        40 |      5 |         20 | 700000.0000 |
+|        40 |      8 |         20 | 700000.0000 |
++-----------+--------+------------+-------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from hotel;
++---------+-----------------+----------+------------+------------+-------------------+---------------+-----------+---------------+
+| HotelId | HotelName       | startype | checkin    | checkOut   | HotelAddress      | pricePerNight | packageId | totalprice    |
++---------+-----------------+----------+------------+------------+-------------------+---------------+-----------+---------------+
+|      11 | TrumpTower      |        5 | 2021-05-10 | 2021-06-08 | Washington        |  100000.00000 |        25 | 2900000.00000 |
+|      12 | Merru island    |        5 | 2022-01-01 | 2022-01-08 | merru             |  100000.00000 |        26 |  700000.00000 |
+|      13 | MauriInn        |        5 | 2021-05-05 | 2021-05-15 | mauritius road    |  200000.00000 |        27 | 2000000.00000 |
+|      14 | BALI INN        |        5 | 2021-05-01 | 2021-05-16 | AIRPORT ROAD      |   70000.00000 |        28 | 1050000.00000 |
+|      15 | Paradise resort |        5 | 2022-08-01 | 2022-09-01 | Silly hill        |  300000.00000 |        29 | 9300000.00000 |
+|      16 | TAJ LONDON      |        4 | 2022-02-01 | 2022-02-17 | OPP LONDON EYE    |   21000.00000 |        30 |  336000.00000 |
+|      17 | SYDNEY HOTEL    |        3 | 2021-04-20 | 2021-05-10 | SYDNEY            |   18000.00000 |        31 |  360000.00000 |
+|      18 | Capetown inn    |        5 | 2021-11-11 | 2021-11-21 | Opp Capetown Port |   20000.00000 |        32 |  200000.00000 |
+|      19 | CHING CHANG     |        3 | 2021-06-03 | 2021-06-10 | CHOW CHOW         |    8000.00000 |        33 |   56000.00000 |
+|      20 | Toronto Hotel   |        5 | 2023-04-10 | 2023-04-25 | toronto           |    5000.00000 |        34 |   75000.00000 |
+|      21 | BURJ AL ARAB    |        4 | 2021-04-30 | 2021-05-10 | SHAIKH AL RD      |   11000.00000 |        35 |  110000.00000 |
+|      22 | TOKYO RESORT    |        4 | 2021-09-10 | 2021-09-30 | TOKYO             |   15000.00000 |        36 |  300000.00000 |
+|      23 | PAN PACIFIC     |        4 | 2022-05-21 | 2022-05-30 | MUR LION          |   18000.00000 |        37 |  162000.00000 |
+|      24 | RAJA HOTEL      |        2 | 2023-08-25 | 2023-09-24 | BABRI MAZJID      |    2300.00000 |        38 |   69000.00000 |
+|      25 | MALINGA HOTEL   |        3 | 2022-12-01 | 2022-12-13 | DILSHANPURA       |    6500.00000 |        39 |   78000.00000 |
+|      26 | W GOA           |        5 | 2022-12-23 | 2022-12-31 | BAGA BEACH        |    4000.00000 |        40 |   32000.00000 |
+|      28 | Shakib hotel    |        5 | 2024-10-10 | 2024-10-22 | Siliguri Corridor |    5000.00000 |        42 |   60000.00000 |
++---------+-----------------+----------+------------+------------+-------------------+---------------+-----------+---------------+
+17 rows in set (0.04 sec)
+
+
+mysql> select * from  package;
++---------+-----------+------------------+--------------+-----------+
+| AdminId | PackageId | TicketsAvailable | Country      | PeriodDay |
++---------+-----------+------------------+--------------+-----------+
+|      22 |        25 |               22 | USA          |        29 |
+|      21 |        26 |                2 | Maldives     |         7 |
+|      21 |        27 |               10 | mauritius    |        10 |
+|      21 |        28 |                2 | Bali         |        15 |
+|      22 |        29 |                2 | Switzerland  |        30 |
+|      22 |        30 |               40 | UK           |        16 |
+|      22 |        31 |               32 | AUSTRALIA    |        20 |
+|      22 |        32 |               25 | South Africa |        10 |
+|      22 |        33 |               30 | China        |         7 |
+|      21 |        34 |               20 | Canada       |        15 |
+|      21 |        35 |               10 | UAE          |        11 |
+|      21 |        36 |               21 | JAPAN        |        20 |
+|      23 |        37 |               24 | Singapore    |         9 |
+|      23 |        38 |               56 | INDIA        |        10 |
+|      23 |        39 |               50 | SRI LANKA    |        12 |
+|      23 |        40 |               60 | INDIA        |         8 |
+|      23 |        42 |               20 | Bangladesh   |        12 |
++---------+-----------+------------------+--------------+-----------+
+17 rows in set (0.00 sec)
+
+
+
+mysql> select * from  transportation;
++-------------+----------------------+-------------+--------------+--------------+-----------+
+| TransportId | modeOfTransportation | ArrivalDate | DeparturDate | price        | packageId |
++-------------+----------------------+-------------+--------------+--------------+-----------+
+|          13 |                    3 | 2021-05-10  | 2021-06-08   |  92000.00000 |        25 |
+|          14 |                    3 | 2022-01-01  | 2022-01-08   |  70000.00000 |        26 |
+|          15 |                    3 | 2021-05-05  | 2021-05-15   |  60000.00000 |        27 |
+|          16 |                    3 | 2021-05-01  | 2021-05-16   |  98000.00000 |        28 |
+|          17 |                    3 | 2022-08-01  | 2022-09-01   | 250000.00000 |        29 |
+|          18 |                    3 | 2022-02-01  | 2022-02-17   |  45000.00000 |        30 |
+|          19 |                    3 | 2021-04-20  | 2021-05-10   |  35000.00000 |        31 |
+|          20 |                    3 | 2021-11-11  | 2021-11-21   |  80000.00000 |        32 |
+|          21 |                    3 | 2021-06-03  | 2021-06-10   |  12000.00000 |        33 |
+|          22 |                    3 | 2023-04-10  | 2023-04-25   |  90000.00000 |        34 |
+|          23 |                    3 | 2021-04-30  | 2021-05-11   |  24000.00000 |        35 |
+|          24 |                    3 | 2021-09-10  | 2021-09-30   |  45000.00000 |        36 |
+|          25 |                    3 | 2022-05-21  | 2022-05-30   |  27000.00000 |        37 |
+|          26 |                    2 | 2023-08-25  | 2023-09-04   |   3200.00000 |        38 |
+|          27 |                    3 | 2022-12-01  | 2022-12-13   |  13000.00000 |        39 |
+|          28 |                    1 | 2022-12-23  | 2022-12-31   |   3000.00000 |        40 |
+|          30 |                    1 | 2024-10-10  | 2024-10-22   |   3000.00000 |        42 |
++-------------+----------------------+-------------+--------------+--------------+-----------+
+17 rows in set (0.00 sec)
